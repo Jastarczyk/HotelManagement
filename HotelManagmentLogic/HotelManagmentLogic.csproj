@@ -41,12 +41,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Enums\RoomClass.cs" />
-    <Compile Include="Models\Abstract\Room.cs" />
-    <Compile Include="Models\ApartamentModel.cs" />
+    <Compile Include="Enums\UserType.cs" />
+    <Compile Include="Models\Acommodation\Abstract\Room.cs" />
+    <Compile Include="Models\Acommodation\ApartamentModel.cs" />
     <Compile Include="Enums\BookingMethods.cs" />
+    <Compile Include="Models\Administration\UserModel.cs" />
     <Compile Include="Models\BookingModel.cs" />
     <Compile Include="Models\GuestModel.cs" />
-    <Compile Include="Models\SingleRoomModel.cs" />
+    <Compile Include="Models\Acommodation\SingleRoomModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
