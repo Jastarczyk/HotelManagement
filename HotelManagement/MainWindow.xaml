@@ -6,18 +6,20 @@
         xmlns:local="clr-namespace:HotelManagement"
         mc:Ignorable="d"
         Title="Hotel Management" Height="600" Width="800">
-    
+
     <Border Padding="10">
         <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="0.5*">
-                
-            </ColumnDefinition>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="16*"/>
+                <RowDefinition Height="533*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="0.5*">
+                </ColumnDefinition>
+                <ColumnDefinition Width="*">
+                </ColumnDefinition>
+            </Grid.ColumnDefinitions>
 
-            <ColumnDefinition Width="*">
-                
-            </ColumnDefinition>
-        </Grid.ColumnDefinitions>
-    </Grid>
+        </Grid>
     </Border>
 </Window>

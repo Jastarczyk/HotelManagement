@@ -1,4 +1,5 @@
 ﻿using HotelManagmentLogic.Models.Acommodation.Abstract;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +10,7 @@ namespace HotelManagmentLogic.Models.Acommodation
 {
     class SingleRoomModel : Room
     {
+        [JsonProperty("HasTelevistion")]
         public bool HasTelevistion { get; set; }
     }
 }
