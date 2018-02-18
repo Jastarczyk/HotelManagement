@@ -2,30 +2,38 @@
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace HotelManagmentLogic.Models.Administration
 {
-    class UserModel
+    [Table("Users")]
+    public class UserModel
     {
-        [JsonProperty("ID")] 
-        public int ID { get; set; }
+        [Required]
+        public Guid ID { get; set; }
 
-        [JsonProperty("Username")]
+        [Required]
+        [MinLength(Configuration.Config.MinimumUserLenght)]
+        [MaxLength(Configuration.Config.MaxUserLength)]
+        [Key]
         public string Username { get; set; }
 
-        [JsonProperty("Password")]
+        [Required]
+        [MinLength(Configuration.Config.MinimumPasswordLenght)]
+        [MaxLength(Configuration.Config.MaxPasswordLength)]
         public string Password { get; set; }
 
-        [JsonProperty("Name")]
+        [Required]
+        public UserType UserType { get; set; }
+
         public string Name { get; set; }
 
-        [JsonProperty("Surname")]
         public string Surname { get; set; }
 
-        [JsonProperty("UserType")]
-        UserType UserType { get; set; }
+        public DateTime CreatingDate { get; set; }
     }
 }

@@ -10,16 +10,12 @@ namespace HotelManagmentLogic.Models.Acommodation
 {
     class ApartamentModel : Room
     {
-        [JsonProperty("LivingRoomsAmount")]
         public int LivingRoomsAmount { get; set; }
 
-        [JsonProperty("ToiletsAmount")]
         public int ToiletsAmount { get; set; }
 
-        [JsonProperty("KitchenAmount")]
         public int KitchenAmount { get; set; }
 
-        [JsonProperty("HasBalcon")]
         public bool HasBalcon { get; set; }
     }
 }

@@ -10,7 +10,6 @@ namespace HotelManagmentLogic.Models.Acommodation
 {
     class SingleRoomModel : Room
     {
-        [JsonProperty("HasTelevistion")]
         public bool HasTelevistion { get; set; }
     }
 }

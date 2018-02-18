@@ -4,11 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HotelManagmentLogic.Enums
+namespace HotelManagementLoader
 {
-    public enum UserType
+    public class Class1
     {
-        Common,
-        Maneger,
     }
 }
