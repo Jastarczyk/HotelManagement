@@ -20,6 +20,14 @@ namespace HotelManagement.UserAccessUI
             userLogin = new UserLogin();
 
             LoginResult loginResult = userLogin.Login(this.UserTextBox.Text, this.UserPasswordTextBox.Password);
+            MessageBox.Show(loginResult.UserAccessActionMessage);
+
+            if (loginResult.UserAccessActionStatus)
+            {
+                WindowsManagement.loginWindow.Close();
+                WindowsManagement.mainWindow.Show();
+            }
+
         }
 
         private void RegisterButton_Click(object sender, RoutedEventArgs e)
