@@ -1,22 +1,22 @@
 ﻿using HotelManagmentLogic.Builders;
 using HotelManagmentLogic.Configuration;
 using HotelManagmentLogic.Entity;
-using HotelManagmentLogic.LoginScreenLogic.Abstract;
+using HotelManagmentLogic.LoginScreenLogic.Abstraction;
+using HotelManagmentLogic.LoginScreenLogic.UserAccessActionResults;
 using HotelManagmentLogic.Models.Administration;
 using System;
 using System.Linq;
-using System.Text.RegularExpressions;
 
 namespace HotelManagmentLogic.LoginScreenLogic
 {
-    public class UserRegister
+    public class UserRegister : UserValidation
     {
-        public static RegistrationResult NewUser(string userName, string password, string confirmedPassword, string name, string surname)
+        public RegistrationResult NewUser(string userName, string password, string confirmedPassword, string name, string surname)
         {
             if (!password.Equals(confirmedPassword))
             {
-                return BuildRegistrationResult(registrationStatus: false, 
-                                                          message: OutputMessages.PasswordNoMatch);
+                return BuildAccessUserActionResult<RegistrationResult>( userActionStatus: false,
+                                                                        userActionMessage: OutputMessages.PasswordNoMatch);
             }
 
             var localUser = new NewUserBuilder().SetUsername(userName)
@@ -25,26 +25,26 @@ namespace HotelManagmentLogic.LoginScreenLogic
                                                 .SetSurname(surname)
                                                 .Build();
 
-            Tuple<bool, string> userValidation = CheckNewUserValidation(localUser);
+            Tuple<bool, string> userValidation = CheckUserValidation(localUser.Name, localUser.Password);
 
             if (!userValidation.Item1)
             {
-                return BuildRegistrationResult(registrationStatus: false, 
-                                                          message: userValidation.Item2);
+                return BuildAccessUserActionResult<RegistrationResult>( userActionStatus: false,
+                                                                        userActionMessage: userValidation.Item2);
             }
             try
             {
                 return AddUserToDataBase(localUser);
             }
 
-            catch (Exception ex)
+            catch (Exception)
             {
-                return BuildRegistrationResult(registrationStatus: false,
-                                                          message: ex.Message);
+                return BuildAccessUserActionResult<RegistrationResult>( userActionStatus: false,
+                                                                        userActionMessage: OutputMessages.InternalError);
             }
         }
 
-        private static RegistrationResult AddUserToDataBase(UserModel user)
+        private RegistrationResult AddUserToDataBase(UserModel user)
         {
             using (var holetContext = new HotelContext())
             {
@@ -52,53 +52,16 @@ namespace HotelManagmentLogic.LoginScreenLogic
 
                 if(duplacateUserCheck)
                 {
-                    return BuildRegistrationResult(registrationStatus: false,
-                                                       message: OutputMessages.UserNameDuplicated);
+                    return BuildAccessUserActionResult<RegistrationResult>( userActionStatus: false,
+                                                                            userActionMessage: OutputMessages.UserNameDuplicated);
                 }
 
                 holetContext.Users.Add(user);
                 holetContext.SaveChanges();
 
-                return BuildRegistrationResult(registrationStatus: true,
-                                                          message: OutputMessages.RegisterSuccesfulMessage);
+                return BuildAccessUserActionResult<RegistrationResult>( userActionStatus: true,
+                                                                        userActionMessage: OutputMessages.RegisterSuccessfulMessage);
             }
-        }
-
-        /// <summary>
-        /// Check user input validation. Returns Item1 as validation status, Item2 as output message.
-        /// </summary>
-        private static Tuple<bool, string> CheckNewUserValidation(UserModel user)
-        {
-            if (user.Username.Length < Config.MinimumUserLenght || user.Username.Length > Config.MaxUserLength)
-            {
-                return new Tuple<bool, string>(false, OutputMessages.InvalidUserName());
-            }
-
-            if (user.Password.Length < Config.MinimumPasswordLenght || user.Password.Length > Config.MaxPasswordLength)
-            {
-                return new Tuple<bool, string>(false, OutputMessages.InvalidPassword());
-            }
-
-            if (!Regex.IsMatch(user.Username, Config.SpecialCharactersPattern))
-            {
-                return new Tuple<bool, string>(false, OutputMessages.InvalidUserNameSyntax);
-            }
-
-            if (!Regex.IsMatch(user.Password, Config.SpecialCharactersPattern))
-            {
-                return new Tuple<bool, string>(false, OutputMessages.InvalidPasswordSyntax);
-            }
-
-            return new Tuple<bool, string>(true, OutputMessages.UserInformationValid);
-        }
-
-        private static RegistrationResult BuildRegistrationResult(bool registrationStatus, string message)
-        {
-            return new RegistrationResult()
-            {
-                RegistrationSuccessful = registrationStatus,
-                RegistrationMessage = message
-            };
         }
     }
 }

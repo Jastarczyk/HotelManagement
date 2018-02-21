@@ -1,4 +1,4 @@
-﻿using HotelManagement.Registration;
+﻿using HotelManagement.UserAccessUI;
 using System;
 using System.Collections.Generic;
 using System.Linq;

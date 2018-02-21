@@ -58,9 +58,12 @@
     <Compile Include="Configuration\OutputMessages.cs" />
     <Compile Include="Enums\RoomClass.cs" />
     <Compile Include="Enums\UserType.cs" />
-    <Compile Include="LoginScreenLogic\Abstract\RegistrationResult.cs" />
+    <Compile Include="LoginScreenLogic\Abstraction\UserValidation.cs" />
+    <Compile Include="LoginScreenLogic\UserAccessActionResults\IUserAccessActionResult.cs" />
+    <Compile Include="LoginScreenLogic\UserAccessActionResults\LoginResult.cs" />
+    <Compile Include="LoginScreenLogic\UserAccessActionResults\RegistrationResult.cs" />
     <Compile Include="LoginScreenLogic\UserRegister.cs" />
-    <Compile Include="LoginScreenLogic\UserValidation.cs" />
+    <Compile Include="LoginScreenLogic\UserLogin.cs" />
     <Compile Include="Entity\HotelContext.cs" />
     <Compile Include="Entity\Migrations\Configuration.cs" />
     <Compile Include="Models\Acommodation\Abstract\Room.cs" />

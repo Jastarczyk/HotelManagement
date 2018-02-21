@@ -8,12 +8,16 @@ namespace HotelManagmentLogic.Configuration
 {
     class OutputMessages
     {
+        //Approving messages
+        public const string RegisterSuccessfulMessage = "User registered successfully";
+        public const string LoginSuccessfulMessage = "Login successful";
+        public const string UserInformationValid = "User information - valid";
+
+
+        //Errors messages
         public const string InvalidUserNameSyntax = "Invalid Username, please do not use special characters";
         public const string InvalidPasswordSyntax = "Invalid Password, please do not use special characters";
         public const string UserNameDuplicated = "This Username is already in use";
-
-        public const string RegisterSuccesfulMessage = "User registered successfully";
-        public const string UserInformationValid = "User information - valid";
 
         public static string InvalidUserName()
         {
@@ -28,5 +32,8 @@ namespace HotelManagmentLogic.Configuration
         }
 
         public static string PasswordNoMatch = "Password doesn't match";
+        public static string NoUserInDataBase = "Username don't exists";
+        public const string IncorrectPassowrd = "Incorrect password";
+        public static string InternalError = "Internal error. If problem will repeat, concact with support";
     }
 }

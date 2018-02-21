@@ -9,7 +9,7 @@ namespace HotelManagmentLogic.Entity
         {
             Database.SetInitializer(new MigrateDatabaseToLatestVersion<HotelContext, Migrations.Configuration>("HotelContext"));
         }
-
+        //TODO: add for register guests and other models
         public virtual DbSet<UserModel> Users { get; set; }
 
     }

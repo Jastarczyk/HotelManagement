@@ -1,9 +1,9 @@
-﻿<Window x:Name="LoginWIndow" x:Class="HotelManagement.LoginWindow"
+﻿<Window x:Class="HotelManagement.UserAccessUI.LoginWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:HotelManagement"
+        xmlns:local="clr-namespace:HotelManagement.UserAccessUI"
         mc:Ignorable="d"
         Title="LoginWindow" Height="150" Width="450" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Foreground="Black">
 
@@ -15,11 +15,11 @@
                 <RowDefinition Height="*"></RowDefinition>
             </Grid.RowDefinitions>
 
-            <TextBox Name="UserTextBox" Grid.Row="0" Height="25" Margin="50,0,10,0" TextWrapping="Wrap" Text="username" VerticalAlignment="Center" Padding="0,2,0,0"/>
+            <TextBox Name="UserTextBox" Grid.Row="0" Height="25" Margin="50,0,10,0" TextWrapping="Wrap" Text="" VerticalAlignment="Center" Padding="0,2,0,0"/>
             <Label x:Name="UserNameLabel" Content="User:" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Center" Height="25" Width="auto" />
 
             <Label x:Name="UserPasswordLabel" Grid.Row="1" Content="Password:" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Center" Height="25" Width="auto" />
-            <TextBox x:Name="UserPasswordTextBox" Grid.Row="1" Height="25" Margin="70,0,10,0" TextWrapping="Wrap" Text="password" VerticalAlignment="Center" Padding="0,2,0,0"/>
+            <PasswordBox x:Name="UserPasswordTextBox" Grid.Row="1" Height="25" Margin="70,0,10,0" VerticalAlignment="Center" Padding="0,2,0,0" PasswordChar="*"/>
 
             <Button x:Name="RegisterButton" Content="Register" Grid.Row="2" HorizontalAlignment ="Right" Margin="0,0,120,0" VerticalAlignment="Center" Width="100" Click="RegisterButton_Click"/>
             <Button x:Name="LoginButton" Content="Login" Grid.Row="2" HorizontalAlignment ="Right" Margin="0,0,10,0" VerticalAlignment="Center" Width="100" Click="LoginButton_Click"/>

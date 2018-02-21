@@ -17,6 +17,14 @@ namespace HotelManagmentLogic.Builders
             user = new UserModel();
         }
 
+        public UserModel Build()
+        {
+            user.CreatingDate = DateTime.Now;
+            user.ID = Guid.NewGuid();
+
+            return user;
+        }
+
         public NewUserBuilder SetUsername(string username)
         {
             user.Username = username;
@@ -45,14 +53,6 @@ namespace HotelManagmentLogic.Builders
         {
             user.UserType = userType;
             return this;
-        }
-
-        public UserModel Build()
-        {
-            user.CreatingDate = DateTime.Now;
-            user.ID = Guid.NewGuid();
-
-            return user;
         }
     }
 }

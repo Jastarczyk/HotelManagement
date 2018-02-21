@@ -1,11 +1,13 @@
 ﻿using HotelManagmentLogic.LoginScreenLogic;
+using HotelManagmentLogic.LoginScreenLogic.UserAccessActionResults;
 using System.Windows;
 
-namespace HotelManagement
+namespace HotelManagement.UserAccessUI
 {
     public partial class LoginWindow : Window
     {
         WindowsManagement windowsManagement;
+        UserLogin userLogin;
 
         public LoginWindow()
         {
@@ -15,7 +17,9 @@ namespace HotelManagement
 
         private void LoginButton_Click(object sender, RoutedEventArgs e)
         {
-            UserValidation.Login(this.UserTextBox.Text, this.UserPasswordTextBox.Text);
+            userLogin = new UserLogin();
+
+            LoginResult loginResult = userLogin.Login(this.UserTextBox.Text, this.UserPasswordTextBox.Password);
         }
 
         private void RegisterButton_Click(object sender, RoutedEventArgs e)
