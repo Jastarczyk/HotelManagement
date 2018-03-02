@@ -43,6 +43,8 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -73,6 +75,9 @@
     <Compile Include="InnerContent\RoomsControl.xaml.cs">
       <DependentUpon>RoomsControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="InnerContent\SubContent\GuestDisplayControl.xaml.cs">
+      <DependentUpon>GuestDisplayControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="InnerContent\SubContent\GuestRegisterControl.xaml.cs">
       <DependentUpon>GuestRegisterControl.xaml</DependentUpon>
     </Compile>
@@ -93,6 +98,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="InnerContent\RoomsControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="InnerContent\SubContent\GuestDisplayControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
