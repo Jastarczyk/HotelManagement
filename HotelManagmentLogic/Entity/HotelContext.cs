@@ -1,5 +1,6 @@
 namespace HotelManagmentLogic.Entity
 {
+    using HotelManagmentLogic.Models;
     using HotelManagmentLogic.Models.Administration;
     using System.Data.Entity;
 
@@ -11,6 +12,6 @@ namespace HotelManagmentLogic.Entity
         }
         //TODO: add for register guests and other models
         public virtual DbSet<UserModel> Users { get; set; }
-
+        public virtual DbSet<GuestModel> Guests { get; set; }
     }
 }

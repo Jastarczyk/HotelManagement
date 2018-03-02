@@ -12,6 +12,7 @@ namespace HotelManagmentLogic.Configuration
         public const string RegisterSuccessfulMessage = "User registered successfully";
         public const string LoginSuccessfulMessage = "Login successful";
         public const string UserInformationValid = "User information - valid";
+        public const string GuestSuccessfulMessage = "Guest added successful";
 
 
         //Errors messages
@@ -31,9 +32,11 @@ namespace HotelManagmentLogic.Configuration
                                                 Config.MinimumPasswordLenght, Config.MaxPasswordLength);
         }
 
-        public static string PasswordNoMatch = "Password doesn't match";
-        public static string NoUserInDataBase = "Username don't exists";
+        public const string PasswordNoMatch = "Password doesn't match";
+        public const string NoUserInDataBase = "Username don't exists";
         public const string IncorrectPassowrd = "Incorrect password";
-        public static string InternalError = "Internal error. If problem will repeat, concact with support";
+        public const string InternalError = "Internal error. If problem will repeat, concact with support";
+
+        public const string ValidArgumentName = "Valid Argument Name: ";
     }
 }

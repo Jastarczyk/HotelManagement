@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace HotelManagmentLogic.Models
 {
-    class GuestModel
+    public class GuestModel
     {
         public Guid ID { get; set; }
 

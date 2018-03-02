@@ -24,22 +24,113 @@
             </Grid.RowDefinitions>
 
             <!--Labels section-->
-            <Label x:Name="UsernameLabel" Grid.Column="0" Grid.Row="0" Content="Username:" HorizontalAlignment="Right" Margin="0,0,0,0" Height="25"/>
-            <Label x:Name="PasswordLabel" Grid.Column="0" Grid.Row="1" Content="Password:" HorizontalAlignment="Right" Margin="0,0,0,0" Height="25"/>
-            <Label x:Name="ConfirmPasswordLabel" Grid.Column="0" Grid.Row="2" Content="Confirm password:" HorizontalAlignment="Right" Margin="0,0,0,0" Height="25"/>
-            <Label x:Name="NameLabel" Grid.Column="0" Grid.Row="3" Content="Name (optional):" HorizontalAlignment="Right" Margin="0,0,0,0" Height="25"/>
-            <Label x:Name="SurnameLabel" Grid.Column="0" Grid.Row="4" Content="Surname (optional):" HorizontalAlignment="Right" Margin="0,0,0,0" Height="25"/>
+            <Label x:Name="UsernameLabel" 
+                   Grid.Column="0" 
+                   Grid.Row="0"
+                   Content="Username:" 
+                   HorizontalAlignment="Right" 
+                   Margin="0,0,0,0" 
+                   Height="25"/>
+
+            <Label x:Name="PasswordLabel"
+                   Grid.Column="0" 
+                   Grid.Row="1" 
+                   Content="Password:"
+                   HorizontalAlignment="Right"
+                   Margin="0,0,0,0"
+                   Height="25"/>
+
+            <Label x:Name="ConfirmPasswordLabel" 
+                   Grid.Column="0"
+                   Grid.Row="2"
+                   Content="Confirm password:"
+                   HorizontalAlignment="Right" 
+                   Margin="0,0,0,0" 
+                   Height="25"/>
+
+            <Label x:Name="NameLabel" 
+                   Grid.Column="0"
+                   Grid.Row="3" 
+                   Content="Name (optional):" 
+                   HorizontalAlignment="Right" 
+                   Margin="0,0,0,0" 
+                   Height="25"/>
+
+            <Label x:Name="SurnameLabel" 
+                   Grid.Column="0" 
+                   Grid.Row="4" 
+                   Content="Surname (optional):"
+                   HorizontalAlignment="Right" 
+                   Margin="0,0,0,0" 
+                   Height="25"/>
 
             <!--TextBoxes section-->
-            <TextBox Name="UserTextBox" Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" Width="auto" Height="25" TextWrapping="Wrap" Text="" VerticalAlignment="Center"/>
-            <PasswordBox Name="PasswordTextBox" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Width="auto" Height="25" VerticalAlignment="Center" PasswordChar="*"/>
-            <PasswordBox Name="ConfirmPasswordTextBox" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" Width="auto" Height="25" VerticalAlignment="Center" PasswordChar="*"/>
-            <TextBox Name="NameTextBox" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2" Width="auto" Height="25" TextWrapping="Wrap" Text="" VerticalAlignment="Center"/>
-            <TextBox Name="SurnameTextBox" Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="2" Width="auto" Height="25" TextWrapping="Wrap" Text="" VerticalAlignment="Center"/>
-            
+            <TextBox Name="UserTextBox" 
+                     Grid.Row="0"
+                     Grid.Column="1"
+                     Grid.ColumnSpan="2" 
+                     Width="auto" 
+                     Height="25" 
+                     TextWrapping="Wrap" 
+                     Text="" 
+                     VerticalAlignment="Center"/>
+
+            <PasswordBox Name="PasswordTextBox" 
+                         Grid.Row="1"
+                         Grid.Column="1" 
+                         Grid.ColumnSpan="2" 
+                         Width="auto" 
+                         Height="25" 
+                         VerticalAlignment="Center" 
+                         PasswordChar="*"/>
+
+            <PasswordBox Name="ConfirmPasswordTextBox"
+                         Grid.Row="2"
+                         Grid.Column="1" 
+                         Grid.ColumnSpan="2" 
+                         Width="auto" 
+                         Height="25" 
+                         VerticalAlignment="Center"
+                         PasswordChar="*"/>
+
+            <TextBox Name="NameTextBox"
+                     Grid.Row="3" 
+                     Grid.Column="1"
+                     Grid.ColumnSpan="2"
+                     Width="auto" 
+                     Height="25" 
+                     TextWrapping="Wrap"
+                     Text=""
+                     VerticalAlignment="Center"/>
+
+            <TextBox Name="SurnameTextBox" 
+                     Grid.Row="4" 
+                     Grid.Column="1"
+                     Grid.ColumnSpan="2" 
+                     Width="auto" 
+                     Height="25" 
+                     TextWrapping="Wrap"
+                     Text="" 
+                     VerticalAlignment="Center"/>
+
             <!--Button section-->
-            <Button x:Name="BackButton" Grid.Row="5" Grid.Column="1" Width="auto" Height="25" Content ="Back" Margin="5" Click="BackButton_Click"></Button>
-            <Button x:Name="RegisterButton" Grid.Row="5" Grid.Column="2" Width="auto" Height="25" Content ="Register" Margin="5" Click="RegisterButton_Click"></Button>
+            <Button x:Name="BackButton" 
+                    Grid.Row="5"
+                    Grid.Column="1"
+                    Width="auto"
+                    Height="25" 
+                    Content ="Back"
+                    Margin="5" 
+                    Click="BackButton_Click"/>
+
+            <Button x:Name="RegisterButton" 
+                    Grid.Row="5" 
+                    Grid.Column="2" 
+                    Width="auto"
+                    Height="25" 
+                    Content ="Register" 
+                    Margin="5" 
+                    Click="RegisterButton_Click"/>
         </Grid>
     </Border>
 </Window>

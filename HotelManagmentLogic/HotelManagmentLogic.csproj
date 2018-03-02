@@ -53,11 +53,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Builders\GuestBuilder.cs" />
     <Compile Include="Builders\NewUserBuilder.cs" />
     <Compile Include="Configuration\Config.cs" />
     <Compile Include="Configuration\OutputMessages.cs" />
     <Compile Include="Enums\RoomClass.cs" />
     <Compile Include="Enums\UserType.cs" />
+    <Compile Include="GuestsControlLogic\AddNewGuestResult.cs" />
+    <Compile Include="GuestsControlLogic\GuestRegister.cs" />
     <Compile Include="LoginScreenLogic\Abstraction\UserValidation.cs" />
     <Compile Include="LoginScreenLogic\UserAccessActionResults\IUserAccessActionResult.cs" />
     <Compile Include="LoginScreenLogic\UserAccessActionResults\LoginResult.cs" />

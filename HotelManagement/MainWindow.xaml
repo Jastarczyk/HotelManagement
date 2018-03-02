@@ -5,21 +5,51 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:HotelManagement"
         mc:Ignorable="d"
-        Title="Hotel Management" Height="600" Width="800">
+        Title="Hotel Management" Height="500" Width="800" Background="White" ResizeMode="NoResize" WindowStyle="ToolWindow"
+        Loaded="OnWindowLoad">
 
-    <Border Padding="10">
-        <Grid>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="16*"/>
-                <RowDefinition Height="533*"/>
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="0.5*">
-                </ColumnDefinition>
-                <ColumnDefinition Width="*">
-                </ColumnDefinition>
-            </Grid.ColumnDefinitions>
+    <Grid>
+        <DockPanel Name="MainDockPanel" Height="auto">
 
-        </Grid>
-    </Border>
+            <Rectangle DockPanel.Dock="Top" 
+                       Fill="#FF62BB6A"
+                       Height="70" 
+                       VerticalAlignment="Top"
+                       Width="800" />
+
+            <StackPanel DockPanel.Dock="Left" HorizontalAlignment="Left" Width="180" Height="auto" Margin="0,0,0,10">
+
+                <Button x:Name="DashboardButton"
+                        Content="Dashboard" 
+                        BorderThickness="0" 
+                        Height="60" 
+                        Width="auto" Click="DashboardButton_Click"/>
+
+                <Button x:Name="GuestsButton" 
+                        Content="Guests" 
+                        Height="60" 
+                        BorderThickness="0" 
+                        Width="auto" Click="GuestsButton_Click"/>
+
+                <Button x:Name="RoomsButton" 
+                        Content="Rooms" 
+                        Height="60" 
+                        BorderThickness="0" 
+                        Width="auto" Click="RoomsButton_Click"/>
+
+                <Button x:Name="AdministrationButton" 
+                        Content="Administarion" 
+                        Height="60" 
+                        BorderThickness="0" 
+                        Width="auto" Click="AdministrationButton_Click"/>
+
+            </StackPanel>
+
+            <Frame DockPanel.Dock="Right" 
+                   x:Name="InnerFrame" 
+                   Width="620"
+                   Margin="0,0,0,10"/>
+
+        </DockPanel>
+    </Grid>
 </Window>

@@ -28,7 +28,6 @@ namespace HotelManagmentLogic.LoginScreenLogic
                 {
                     UserModel user = hotelContext.Users.Where(x => x.Username.Equals(userName)).ToList().FirstOrDefault();
 
-
                     if (user == null)
                     {
                         return BuildAccessUserActionResult<LoginResult>( userActionStatus: false, 

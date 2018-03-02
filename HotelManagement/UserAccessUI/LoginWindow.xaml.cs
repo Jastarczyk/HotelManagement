@@ -24,16 +24,25 @@ namespace HotelManagement.UserAccessUI
 
             if (loginResult.UserAccessActionStatus)
             {
-                WindowsManagement.loginWindow.Close();
-                WindowsManagement.mainWindow.Show();
+                PrecedeToMainWindow();
             }
-
         }
 
         private void RegisterButton_Click(object sender, RoutedEventArgs e)
         {
             WindowsManagement.loginWindow.Hide();
             WindowsManagement.registrationWindow.Show();
+        }
+
+        private void ForceLogin_Click(object sender, RoutedEventArgs e)
+        {
+            PrecedeToMainWindow();
+        }
+
+        private void PrecedeToMainWindow()
+        {
+            WindowsManagement.loginWindow.Close();
+            WindowsManagement.mainWindow.Show();
         }
     }
 }

@@ -61,10 +61,45 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="InnerContent\AdministrationControl.xaml.cs">
+      <DependentUpon>AdministrationControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="InnerContent\DashboardControl.xaml.cs">
+      <DependentUpon>DashboardControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="InnerContent\GuestsControl.xaml.cs">
+      <DependentUpon>GuestsControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="InnerContent\RoomsControl.xaml.cs">
+      <DependentUpon>RoomsControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="InnerContent\SubContent\GuestRegisterControl.xaml.cs">
+      <DependentUpon>GuestRegisterControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UserAccessUI\RegisterWindow.xaml.cs">
       <DependentUpon>RegisterWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="WindowsManagement.cs" />
+    <Page Include="InnerContent\AdministrationControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="InnerContent\DashboardControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="InnerContent\GuestsControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="InnerContent\RoomsControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="InnerContent\SubContent\GuestRegisterControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="UserAccessUI\LoginWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -122,5 +157,6 @@
       <Name>HotelManagmentLogic</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
