@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:HotelManagement.InnerContent.SubContent"
              mc:Ignorable="d" 
-             d:DesignHeight="250" Background="White" Width="450">
+             d:DesignHeight="250" Width="auto">
 
     <Grid>
         <Grid.ColumnDefinitions>
@@ -14,7 +14,6 @@
         </Grid.ColumnDefinitions>
 
         <Grid.RowDefinitions>
-            <RowDefinition Height="*"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
@@ -96,14 +95,6 @@
                  TextWrapping="Wrap" 
                  Text="" 
                  VerticalAlignment="Center"/>
-
-        <Button x:Name="AddButton"
-                Grid.Column="1"
-                Grid.Row="5"
-                Content="Add"
-                Width="75"
-                Height="20"
-                HorizontalAlignment="Right" Click="AddButton_Click"/>
 
     </Grid>
 </UserControl>

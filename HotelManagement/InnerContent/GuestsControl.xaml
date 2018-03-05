@@ -8,55 +8,129 @@
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="600">
 
-    <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="1"/>
-            <ColumnDefinition Width="*"/>
-        </Grid.ColumnDefinitions>
 
-        <Grid.RowDefinitions>
-            <RowDefinition Height="30"></RowDefinition>
-            <RowDefinition Height="*"></RowDefinition>
-        </Grid.RowDefinitions>
+    <TabControl HorizontalAlignment="Left" Height="300" VerticalAlignment="Top" Width="600">
+        <TabControl.Background>
+            <RadialGradientBrush>
+                <GradientStop Color="#FFE6E6E6" Offset="1"/>
+                <GradientStop Color="White"/>
+            </RadialGradientBrush>
+        </TabControl.Background>
+        <TabItem Header="Register guest">
 
-        <Label Grid.Column="0"
-               Grid.Row="0"
-               Content="Register a new guest"
-               FontWeight="SemiBold"
-               VerticalAlignment="Center"
-               Background="#FF8CD198" 
-               Height="28" 
-               Margin="0,0,0,2"/>
-        
-        <Separator Grid.Column="1"
-                   Grid.Row="1"
-                   Background="Black"/>
-        
-                
-        <Label Grid.Column="2"
-               Grid.Row="0"
-               Content="Display Guests"
-               FontWeight="SemiBold"
-               VerticalAlignment="Center"
-               Background="#FF8CD198" 
-               Height="28" 
-               Margin="0,0,0,2"/>
+            <Grid Background="White">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="0.4*"></ColumnDefinition>
+                    <ColumnDefinition Width="0.4*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
 
-        <SubContent:GuestRegisterControl
-            Grid.Column="0"
-            Grid.Row="1"
-            HorizontalAlignment="Stretch" 
-            VerticalAlignment="Stretch"
-            Padding="10"
-            />
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                </Grid.RowDefinitions>
 
-        <SubContent:GuestDisplayControl
-            Grid.Column="2"
-            Grid.Row="1"
-            HorizontalAlignment="Stretch"
-            VerticalAlignment="Stretch"
-            Padding="10"
-            />
-    </Grid>
+                <GroupBox Header="Add new guest" 
+                          HorizontalAlignment="Stretch" 
+                          VerticalAlignment="Stretch"
+                          Margin="5" 
+                          Grid.RowSpan="1"
+                          Grid.ColumnSpan="1">
+
+                    <SubContent:GuestRegisterControl
+                    Grid.Column="0"
+                    Grid.Row="0"
+                    HorizontalAlignment="Stretch"
+                    Height="auto" 
+                    VerticalAlignment="Stretch" 
+                    Width="auto"/>
+
+                </GroupBox>
+
+                <GroupBox Grid.Column="1" 
+                          Grid.ColumnSpan="2"
+                          Header="Accomodation date" 
+                          HorizontalAlignment="Stretch"
+                          Margin="5"
+                          Grid.Row="0" 
+                          VerticalAlignment="Stretch">
+
+                    <Calendar HorizontalAlignment="Center"
+                          Grid.Row="0"
+                          Grid.Column="1"
+                          VerticalAlignment="Top"
+                          Height="165"
+                          Width="175"/>
+
+                </GroupBox>
+
+                <GroupBox Grid.Column="0" 
+                          Header="Choose room" 
+                          HorizontalAlignment="Stretch"
+                          Margin="5"
+                          Grid.Row="1" 
+                          Grid.ColumnSpan="1"
+                          Grid.RowSpan="2"
+                          VerticalAlignment="Stretch">
+
+                    <ComboBox x:Name="roomChooseComboBox"
+                              Width="auto"
+                              Height="20"
+                              VerticalAlignment="Top"
+                              Margin="5" BorderBrush="White"
+                              >
+                        <ComboBox.Background>
+                            <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
+                                <GradientStop Color="#FFF0F0F0" Offset="0"/>
+                                <GradientStop Color="White" Offset="1"/>
+                            </LinearGradientBrush>
+                        </ComboBox.Background>
+                    </ComboBox>
+                </GroupBox>
+
+                <TextBox x:Name="FromDateTextBox"
+                         Grid.Column="1"
+                         IsReadOnly="True"
+                         Cursor="Hand"
+                         HorizontalAlignment="Center" 
+                         Height="20" 
+                         Grid.Row="1" 
+                         TextWrapping="Wrap" 
+                         TextAlignment="Center"
+                         Text="25/04/2018" 
+                         VerticalAlignment="Center" 
+                         Width="75"/>
+
+                <TextBox x:Name="ToDateTextBox"
+                         Grid.Column="2"
+                         Cursor="Hand"
+                         IsReadOnly="False"
+                         HorizontalAlignment="Center" 
+                         Height="20" 
+                         Grid.Row="1" 
+                         TextWrapping="Wrap" 
+                         TextAlignment="Center"
+                         Text="28/04/2018" 
+                         VerticalAlignment="Center" 
+                         Width="75"/>
+
+                <Button x:Name="addButton"
+                        Content="Add" 
+                        Grid.Column="2"
+                        HorizontalAlignment="Center" 
+                        Grid.Row="2" 
+                        VerticalAlignment="Center"
+                        Margin="5"
+                        Width="100" 
+                        Height="25" 
+                        Click="AddButton_Click"/>
+
+            </Grid>
+        </TabItem>
+
+        <TabItem Header="Display Guests">
+            <Grid Background="#FFE5E5E5"/>
+        </TabItem>
+    </TabControl>
 </UserControl>
