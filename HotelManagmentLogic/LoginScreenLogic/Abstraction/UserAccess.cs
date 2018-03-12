@@ -1,4 +1,5 @@
 ﻿using HotelManagmentLogic.Configuration;
+using HotelManagmentLogic.GuestsControlLogic;
 using HotelManagmentLogic.LoginScreenLogic.UserAccessActionResults;
 using System;
 using System.Collections.Generic;
@@ -9,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace HotelManagmentLogic.LoginScreenLogic.Abstraction
 {
-    public abstract class UserValidation
+    public abstract class UserAccess
     {
         /// <summary>
         /// Check user input validation. Returns Item1 as validation status, Item2 as output message.
@@ -39,14 +40,14 @@ namespace HotelManagmentLogic.LoginScreenLogic.Abstraction
             return new Tuple<bool, string>(true, OutputMessages.UserInformationValid);
         }
 
-        protected T BuildAccessUserActionResult<T>(bool userActionStatus, string userActionMessage) where T : IUserAccessActionResult
+        protected virtual AddToDatabaseResult BuildOperationResult(string message, bool status, Exception exception = null, object obj = null)
         {
-            var resultInstance = Activator.CreateInstance<T>();
-
-            resultInstance.UserAccessActionStatus = userActionStatus;
-            resultInstance.UserAccessActionMessage = userActionMessage;
-
-            return resultInstance;
+            return new AddToDatabaseResult()
+            {
+                Message = message,
+                OperationSuccess = status,
+                PossibleException = exception
+            };
         }
     }
 }

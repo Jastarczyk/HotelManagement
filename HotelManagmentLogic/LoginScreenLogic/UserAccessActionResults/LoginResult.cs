@@ -1,4 +1,5 @@
-﻿using HotelManagmentLogic.Models.Administration;
+﻿using HotelManagmentLogic.GuestsControlLogic;
+using HotelManagmentLogic.Models.Administration;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,11 +8,9 @@ using System.Threading.Tasks;
 
 namespace HotelManagmentLogic.LoginScreenLogic.UserAccessActionResults
 {
-    public class LoginResult : IUserAccessActionResult
+    public class LoginResult : AddToDatabaseResult
     {
-        public bool UserAccessActionStatus { get; set; }
-        public string UserAccessActionMessage { get; set; }
-        public UserModel LoggedUser { get; set; }
+        public User AccessingUser { get; set; }
         public DateTime LoginTime { get; set; }
     }
 }

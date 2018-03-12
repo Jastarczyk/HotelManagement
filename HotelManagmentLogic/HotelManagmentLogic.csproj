@@ -57,25 +57,24 @@
     <Compile Include="Builders\NewUserBuilder.cs" />
     <Compile Include="Configuration\Config.cs" />
     <Compile Include="Configuration\OutputMessages.cs" />
+    <Compile Include="Entity\CommonOperations\DatabaseOperations.cs" />
+    <Compile Include="Entity\DatabaseConfig\DatabaseInfo.cs" />
     <Compile Include="Enums\RoomClass.cs" />
     <Compile Include="Enums\UserType.cs" />
-    <Compile Include="GuestsControlLogic\AddNewGuestResult.cs" />
-    <Compile Include="GuestsControlLogic\GuestRegister.cs" />
-    <Compile Include="LoginScreenLogic\Abstraction\UserValidation.cs" />
-    <Compile Include="LoginScreenLogic\UserAccessActionResults\IUserAccessActionResult.cs" />
+    <Compile Include="DatabaseAccess\RoomDbTableOperations.cs" />
+    <Compile Include="Entity\OperationResults\AddToDatabaseResult.cs" />
+    <Compile Include="LoginScreenLogic\Abstraction\UserAccess.cs" />
     <Compile Include="LoginScreenLogic\UserAccessActionResults\LoginResult.cs" />
     <Compile Include="LoginScreenLogic\UserAccessActionResults\RegistrationResult.cs" />
     <Compile Include="LoginScreenLogic\UserRegister.cs" />
     <Compile Include="LoginScreenLogic\UserLogin.cs" />
-    <Compile Include="Entity\HotelContext.cs" />
+    <Compile Include="Entity\DatabaseConfig\HotelContext.cs" />
     <Compile Include="Entity\Migrations\Configuration.cs" />
-    <Compile Include="Models\Acommodation\Abstract\Room.cs" />
-    <Compile Include="Models\Acommodation\ApartamentModel.cs" />
+    <Compile Include="Models\Acommodation\Room.cs" />
     <Compile Include="Enums\BookingMethods.cs" />
-    <Compile Include="Models\Administration\UserModel.cs" />
-    <Compile Include="Models\BookingModel.cs" />
-    <Compile Include="Models\GuestModel.cs" />
-    <Compile Include="Models\Acommodation\SingleRoomModel.cs" />
+    <Compile Include="Models\Administration\User.cs" />
+    <Compile Include="Models\Booking.cs" />
+    <Compile Include="Models\Guest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -95,5 +94,6 @@
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

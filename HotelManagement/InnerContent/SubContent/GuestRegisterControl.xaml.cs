@@ -22,17 +22,5 @@ namespace HotelManagement.InnerContent.SubContent
         {
             InitializeComponent();
         }
-
-        private void AddButton_Click(object sender, RoutedEventArgs e)
-        {
-            GuestRegister guestRegister = new GuestRegister();
-
-            AddNewGuestResult result = guestRegister.Add( NameTextBox.Text, 
-                                                          SurnameTextBox.Text, 
-                                                          EmailTextBox.Text,
-                                                          MobileNumberTextBox.Text, 
-                                                          AddressTextBox.Text);
-            MessageBox.Show(result.Message);
-        }
     }
 }

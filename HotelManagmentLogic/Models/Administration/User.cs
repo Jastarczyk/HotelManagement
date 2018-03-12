@@ -1,20 +1,15 @@
 ﻿using HotelManagmentLogic.Enums;
-using Newtonsoft.Json;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace HotelManagmentLogic.Models.Administration
 {
     [Table("Users")]
-    public class UserModel
+    public class User
     {
         [Required]
-        public Guid ID { get; set; }
+        public int ID { get; set; }
 
         [Required]
         [MinLength(Configuration.Config.MinimumUserLenght)]

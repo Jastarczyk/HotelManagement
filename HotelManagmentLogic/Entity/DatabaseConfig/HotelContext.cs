@@ -1,6 +1,7 @@
-namespace HotelManagmentLogic.Entity
+namespace HotelManagmentLogic.Entity.DatabaseConfig
 {
     using HotelManagmentLogic.Models;
+    using HotelManagmentLogic.Models.Acommodation;
     using HotelManagmentLogic.Models.Administration;
     using System.Data.Entity;
 
@@ -10,8 +11,10 @@ namespace HotelManagmentLogic.Entity
         {
             Database.SetInitializer(new MigrateDatabaseToLatestVersion<HotelContext, Migrations.Configuration>("HotelContext"));
         }
-        //TODO: add for register guests and other models
-        public virtual DbSet<UserModel> Users { get; set; }
-        public virtual DbSet<GuestModel> Guests { get; set; }
+
+        public virtual DbSet<User> Users { get; set; }
+        public virtual DbSet<Guest> Guests { get; set; }
+        public virtual DbSet<Room> Rooms { get; set; }
+        public virtual DbSet<Booking> Booking { get; set; }
     }
 }

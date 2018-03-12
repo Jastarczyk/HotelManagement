@@ -1,4 +1,5 @@
-﻿using HotelManagmentLogic.LoginScreenLogic;
+﻿using HotelManagmentLogic.Entity.DatabaseConfig;
+using HotelManagmentLogic.LoginScreenLogic;
 using HotelManagmentLogic.LoginScreenLogic.UserAccessActionResults;
 using System.Windows;
 
@@ -13,6 +14,15 @@ namespace HotelManagement.UserAccessUI
         {
             InitializeComponent();
             windowsManagement = new WindowsManagement(this);
+
+            if (!DatabaseInfo.CheckDataBaseConnection())
+            {
+                MessageBox.Show(string.Format("{0} : {1}", HotelManagmentLogic.Configuration.OutputMessages.DataBaseConnectionError,
+                                                           DatabaseInfo.GetDataBaseName()));
+
+                Application.Current.Shutdown();
+            }
+
         }
 
         private void LoginButton_Click(object sender, RoutedEventArgs e)
@@ -20,9 +30,9 @@ namespace HotelManagement.UserAccessUI
             userLogin = new UserLogin();
 
             LoginResult loginResult = userLogin.Login(this.UserTextBox.Text, this.UserPasswordTextBox.Password);
-            MessageBox.Show(loginResult.UserAccessActionMessage);
+            MessageBox.Show(loginResult.Message);
 
-            if (loginResult.UserAccessActionStatus)
+            if (loginResult.OperationSuccess)
             {
                 PrecedeToMainWindow();
             }
@@ -31,6 +41,8 @@ namespace HotelManagement.UserAccessUI
         private void RegisterButton_Click(object sender, RoutedEventArgs e)
         {
             WindowsManagement.loginWindow.Hide();
+
+            WindowsManagement.registrationWindow = new RegistrationWindow();
             WindowsManagement.registrationWindow.Show();
         }
 

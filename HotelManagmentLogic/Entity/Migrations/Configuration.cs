@@ -1,11 +1,12 @@
 namespace HotelManagmentLogic.Migrations
 {
+    using HotelManagmentLogic.Entity.DatabaseConfig;
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Migrations;
     using System.Linq;
 
-    internal sealed class Configuration : DbMigrationsConfiguration<Entity.HotelContext>
+    internal sealed class Configuration : DbMigrationsConfiguration<HotelContext>
     {
         public Configuration()
         {
@@ -13,9 +14,8 @@ namespace HotelManagmentLogic.Migrations
             ContextKey = "HotelManagmentLogic.Entity.HotelContext";
         }
 
-        protected override void Seed(Entity.HotelContext context)
+        protected override void Seed(HotelContext context)
         {
-
         }
     }
 }

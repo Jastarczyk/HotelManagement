@@ -10,17 +10,16 @@ namespace HotelManagmentLogic.Builders
 {
     class NewUserBuilder
     {
-        private UserModel user;
+        private User user;
 
         public NewUserBuilder()
         {
-            user = new UserModel();
+            user = new User();
         }
 
-        public UserModel Build()
+        public User Build()
         {
             user.CreatingDate = DateTime.Now;
-            user.ID = Guid.NewGuid();
 
             return user;
         }

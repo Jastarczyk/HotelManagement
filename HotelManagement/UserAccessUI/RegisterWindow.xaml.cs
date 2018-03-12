@@ -24,9 +24,9 @@ namespace HotelManagement.UserAccessUI
                                                                           NameTextBox.Text, 
                                                                           SurnameTextBox.Text);
 
-            MessageBox.Show(registrationResult.UserAccessActionMessage);
+            MessageBox.Show(registrationResult.Message);
 
-            if (registrationResult.UserAccessActionStatus)
+            if (registrationResult.OperationSuccess)
             {
                 WindowsManagement.registrationWindow.Hide();
                 WindowsManagement.loginWindow.Show();

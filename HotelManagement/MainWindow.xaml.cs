@@ -1,4 +1,5 @@
 ﻿using HotelManagement.InnerContent;
+using HotelManagmentLogic.Entity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -59,6 +60,23 @@ namespace HotelManagement
         private void AdministrationButton_Click(object sender, RoutedEventArgs e)
         {
             InnerFrame.Content = administrationControl;
+        }
+
+        private void ExitButton_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBoxResult messageBoxResult = MessageBox.Show( HotelManagmentLogic.Configuration.OutputMessages.QuestionApplicationExit,
+                                                                 HotelManagmentLogic.Configuration.OutputMessages.ApplicationClosingMessage, 
+                                                                 MessageBoxButton.OKCancel);
+
+            if (messageBoxResult == MessageBoxResult.OK)
+            {
+                Application.Current.Shutdown();
+            }
+        }
+
+        private void Rectangle_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            this.DragMove();
         }
     }
 }

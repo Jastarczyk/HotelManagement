@@ -7,12 +7,10 @@ using System.Threading.Tasks;
 
 namespace HotelManagmentLogic.GuestsControlLogic
 {
-    public class AddNewGuestResult
+    public class AddToDatabaseResult
     {
-        public GuestModel AddingGuest { get; set; }
-        public bool AddOperationSuccess { get; set; }
+        public bool OperationSuccess { get; set; }
         public string Message { get; set; }
-
         public Exception PossibleException { get; set; } = null;
     }
 }

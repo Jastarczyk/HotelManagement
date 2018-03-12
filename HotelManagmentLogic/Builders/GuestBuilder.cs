@@ -9,11 +9,11 @@ namespace HotelManagmentLogic.Builders
 {
     public class GuestBuilder
     {
-        private GuestModel guest;
+        private Guest guest;
 
         public GuestBuilder()
         {
-            guest = new GuestModel();
+            guest = new Guest();
         }
 
         public GuestBuilder SetName(string name)
@@ -40,16 +40,30 @@ namespace HotelManagmentLogic.Builders
             return this;
         }
 
-        public GuestBuilder SetTelephoneNumber(long number)
+        public GuestBuilder SetTelephoneNumber(string number)
         {
             guest.TelephoneNumber = number;
             return this;
         }
 
-        public GuestModel Build()
+
+        public GuestBuilder SetRoom(int roomID)
         {
-            guest.ID = Guid.NewGuid();
+            guest.RoomID = roomID;
+            return this;
+        }
+
+        public GuestBuilder SetBooking(int bookingID)
+        {
+            guest.BookingID = bookingID;
+            return this;
+        }
+
+        public Guest Build()
+        {
             return guest;
         }
+
     }
+
 }

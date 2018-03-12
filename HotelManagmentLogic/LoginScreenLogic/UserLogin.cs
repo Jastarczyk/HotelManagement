@@ -1,62 +1,60 @@
 ﻿using HotelManagmentLogic.Configuration;
-using HotelManagmentLogic.Entity;
+using HotelManagmentLogic.Entity.DatabaseConfig;
+using HotelManagmentLogic.GuestsControlLogic;
 using HotelManagmentLogic.LoginScreenLogic.Abstraction;
 using HotelManagmentLogic.LoginScreenLogic.UserAccessActionResults;
 using HotelManagmentLogic.Models.Administration;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace HotelManagmentLogic.LoginScreenLogic
 {
-    public class UserLogin : UserValidation
+    public class UserLogin : UserAccess
     {
         public LoginResult Login(string userName, string password)
         {
-            var userValidation = CheckUserValidation(userName, password);
+            var userValidation = base.CheckUserValidation(userName, password);
 
             if (!userValidation.Item1)
             {
-                return BuildAccessUserActionResult<LoginResult>(userActionStatus: false, userActionMessage: userValidation.Item2);
+                return BuildOperationResult(userValidation.Item2, false) as LoginResult;
             }
 
             try
             {
                 using (var hotelContext = new HotelContext())
                 {
-                    UserModel user = hotelContext.Users.Where(x => x.Username.Equals(userName)).ToList().FirstOrDefault();
+                    User user = hotelContext.Users.Where(x => x.Username.Equals(userName)).ToList().FirstOrDefault();
 
                     if (user == null)
                     {
-                        return BuildAccessUserActionResult<LoginResult>( userActionStatus: false, 
-                                                                         userActionMessage: OutputMessages.NoUserInDataBase);
+                        return BuildOperationResult(OutputMessages.NoUserInDataBase, false, obj: user) as LoginResult;
                     }
 
                     if (!user.Password.Equals(password))
                     {
-                        return BuildAccessUserActionResult<LoginResult>( userActionStatus: false, 
-                                                                         userActionMessage: OutputMessages.IncorrectPassowrd);
+                        return BuildOperationResult(OutputMessages.IncorrectPassowrd, false, obj: user) as LoginResult;
                     }
 
-                    return UserLoginSuccessfullResult(user);
+                    return BuildOperationResult(OutputMessages.LoginSuccessfulMessage, true, obj: user) as LoginResult;
                 }
             }
-            catch (Exception)
+
+            catch (Exception ex)
             {
-                return BuildAccessUserActionResult<LoginResult>(userActionStatus: false, userActionMessage: OutputMessages.InternalError);
+                return BuildOperationResult(message: OutputMessages.InternalError, status: false, exception: ex) as LoginResult;
             }
         }
 
-        private LoginResult UserLoginSuccessfullResult(UserModel user)
+        protected override AddToDatabaseResult BuildOperationResult(string message, bool status, Exception exception = null, object obj = null)
         {
             return new LoginResult()
             {
-                LoggedUser = user,
+                Message = message,
+                OperationSuccess = status,
                 LoginTime = DateTime.Now,
-                UserAccessActionMessage = OutputMessages.LoginSuccessfulMessage,
-                UserAccessActionStatus = true
+                AccessingUser = (User) obj,
+                PossibleException = exception
             };
         }
     }

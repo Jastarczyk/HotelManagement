@@ -9,6 +9,7 @@ namespace HotelManagmentLogic.Enums
     public enum UserType
     {
         Common,
-        Maneger,
+        Manager,
+        Administrator 
     }
 }

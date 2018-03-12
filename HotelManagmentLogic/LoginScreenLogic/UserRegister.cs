@@ -1,6 +1,9 @@
 ﻿using HotelManagmentLogic.Builders;
 using HotelManagmentLogic.Configuration;
 using HotelManagmentLogic.Entity;
+using HotelManagmentLogic.Entity.CommonOperations;
+using HotelManagmentLogic.Entity.DatabaseConfig;
+using HotelManagmentLogic.GuestsControlLogic;
 using HotelManagmentLogic.LoginScreenLogic.Abstraction;
 using HotelManagmentLogic.LoginScreenLogic.UserAccessActionResults;
 using HotelManagmentLogic.Models.Administration;
@@ -9,14 +12,14 @@ using System.Linq;
 
 namespace HotelManagmentLogic.LoginScreenLogic
 {
-    public class UserRegister : UserValidation
+    public class UserRegister : UserAccess
     {
+        //TODO: hesus need to rework all of this shit now
         public RegistrationResult NewUser(string userName, string password, string confirmedPassword, string name, string surname)
         {
             if (!password.Equals(confirmedPassword))
             {
-                return BuildAccessUserActionResult<RegistrationResult>( userActionStatus: false,
-                                                                        userActionMessage: OutputMessages.PasswordNoMatch);
+                return BuildOperationResult(OutputMessages.PasswordNoMatch, false) as RegistrationResult;
             }
 
             var localUser = new NewUserBuilder().SetUsername(userName)
@@ -29,39 +32,38 @@ namespace HotelManagmentLogic.LoginScreenLogic
 
             if (!userValidation.Item1)
             {
-                return BuildAccessUserActionResult<RegistrationResult>( userActionStatus: false,
-                                                                        userActionMessage: userValidation.Item2);
+                return BuildOperationResult(userValidation.Item2, false) as RegistrationResult;
             }
             try
             {
-                return AddUserToDataBase(localUser);
+                //TODO check if can take duplicate user or exception because its a key for user
+                AddToDatabaseResult result = DatabaseOperations.AddDataToHotelDatabase<User>(localUser);
+
+                return result.OperationSuccess ? BuildOperationResult(OutputMessages.RegisterSuccessfulMessage, true, obj: localUser)
+                                                 as RegistrationResult
+                                               : BuildOperationResult(result.Message, result.OperationSuccess, result.PossibleException, localUser)
+                                                 as RegistrationResult;
             }
 
-            catch (Exception)
+            catch (Exception ex)
             {
-                return BuildAccessUserActionResult<RegistrationResult>( userActionStatus: false,
-                                                                        userActionMessage: OutputMessages.InternalError);
+                return BuildOperationResult(OutputMessages.InternalError, false, ex) as RegistrationResult;
             }
         }
 
-        private RegistrationResult AddUserToDataBase(UserModel user)
+        protected override AddToDatabaseResult BuildOperationResult(string message, bool status, Exception exception = null, object obj = null)
         {
-            using (var holetContext = new HotelContext())
+            return new RegistrationResult()
             {
-                bool duplacateUserCheck = holetContext.Users.Any(x => x.Name.Equals(user.Username));
-
-                if(duplacateUserCheck)
-                {
-                    return BuildAccessUserActionResult<RegistrationResult>( userActionStatus: false,
-                                                                            userActionMessage: OutputMessages.UserNameDuplicated);
-                }
-
-                holetContext.Users.Add(user);
-                holetContext.SaveChanges();
-
-                return BuildAccessUserActionResult<RegistrationResult>( userActionStatus: true,
-                                                                        userActionMessage: OutputMessages.RegisterSuccessfulMessage);
-            }
+                Message = message,
+                OperationSuccess = status,
+                PossibleException = exception,
+                RegisteringUser = (User)obj,
+                RegistrationDate = DateTime.Now
+            };
         }
+
+
+
     }
 }
