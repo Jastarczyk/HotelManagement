@@ -14,7 +14,6 @@ namespace HotelManagmentLogic.LoginScreenLogic
 {
     public class UserRegister : UserAccess
     {
-        //TODO: hesus need to rework all of this shit now
         public RegistrationResult NewUser(string userName, string password, string confirmedPassword, string name, string surname)
         {
             if (!password.Equals(confirmedPassword))
