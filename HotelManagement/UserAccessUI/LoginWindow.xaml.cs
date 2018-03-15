@@ -1,4 +1,5 @@
 ﻿using HotelManagmentLogic.Entity.DatabaseConfig;
+using HotelManagmentLogic.Logger;
 using HotelManagmentLogic.LoginScreenLogic;
 using HotelManagmentLogic.LoginScreenLogic.UserAccessActionResults;
 using System.Windows;
@@ -27,15 +28,8 @@ namespace HotelManagement.UserAccessUI
 
         private void LoginButton_Click(object sender, RoutedEventArgs e)
         {
-            userLogin = new UserLogin();
-
-            LoginResult loginResult = userLogin.Login(this.UserTextBox.Text, this.UserPasswordTextBox.Password);
-            MessageBox.Show(loginResult.Message);
-
-            if (loginResult.OperationSuccess)
-            {
-                PrecedeToMainWindow();
-            }
+            PerformLoginAction();
+            ErrorLogger.AddLog(new ErrorLogger.Error("dupa", "dupa"));
         }
 
         private void RegisterButton_Click(object sender, RoutedEventArgs e)
@@ -55,6 +49,27 @@ namespace HotelManagement.UserAccessUI
         {
             WindowsManagement.loginWindow.Close();
             WindowsManagement.mainWindow.Show();
+        }
+
+        private void Window_KeyUp(object sender, System.Windows.Input.KeyEventArgs e)
+        {
+            if (e.Key == System.Windows.Input.Key.Enter)
+            {
+                PerformLoginAction();
+            }
+        }
+
+        private void PerformLoginAction()
+        {
+            userLogin = new UserLogin();
+
+            LoginResult loginResult = userLogin.Login(this.UserTextBox.Text, this.UserPasswordTextBox.Password);
+            MessageBox.Show(loginResult.Message);
+
+            if (loginResult.OperationSuccess)
+            {
+                PrecedeToMainWindow();
+            }
         }
     }
 }

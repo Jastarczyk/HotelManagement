@@ -2,7 +2,9 @@
 using HotelManagmentLogic.Configuration;
 using HotelManagmentLogic.DatabaseAccess;
 using HotelManagmentLogic.Entity.CommonOperations;
+using HotelManagmentLogic.Enums;
 using HotelManagmentLogic.GuestsControlLogic;
+using HotelManagmentLogic.Logger;
 using HotelManagmentLogic.Models;
 using HotelManagmentLogic.Models.Acommodation;
 using System;
@@ -10,7 +12,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
-
+using System.Windows.Media;
 
 namespace HotelManagement.InnerContent
 {
@@ -24,31 +26,50 @@ namespace HotelManagement.InnerContent
         public GuestsControl()
         {
             InitializeComponent();
-
-            roomsNumberList = RoomDbTableOperations.GetAllRoomsNumbersFromDB();
-            this.roomChooseComboBox.ItemsSource = ConvertEachListElementToString(roomsNumberList);
+            LoadCurrentControlContent();
         }
 
+        private void LoadCurrentControlContent()
+        {
+            roomsNumberList = RoomDbTableOperations.GetAllRoomsNumbersFromDB();
+            this.roomChooseComboBox.ItemsSource = ConvertEachListElementToString(roomsNumberList);
+            this.BookingMethodsCombobox.ItemsSource = Enum.GetValues(typeof(BookingMethods));
+
+            this.BookingMethodsCombobox.Text = BookingMethodsCombobox.Items.Count > 0 ?
+                                               BookingMethodsCombobox.Items.GetItemAt(0).ToString() 
+                                               : string.Empty;
+        }
+
+        //TODO move this logic to other project!
         private void AddButton_Click(object sender, RoutedEventArgs e)
         {
-            bool formatPredicate = CheckIfAllInformationFilled();
+            bool formatPredicate = CheckIfAllInputsFilled();
 
             if (formatPredicate)
             {
                 Room choosedRoom = new Room();
+                Booking bookingInfo = new Booking();
+                AddToDatabaseResult bookingInfoResults;
                 List<Room> roomsfullList = RoomDbTableOperations.GetAllRoomsFromDB();
 
-                Booking bookingInfo = new Booking()
+                try
                 {
-                    //TODO TO TRYPARSE OR constatnt format (edit disable, can choose only by calendar)
-                    BookingDate = DateTime.Now,
-                    ReservedTo = DateTime.Parse(ToDateTextBox.Text),
-                    ReservedFrom = DateTime.Parse(FromDateTextBox.Text),
-                    //TODO add new feature to choose booking methods
-                    BookingMethod = HotelManagmentLogic.Enums.BookingMethods.PersonalBooking
-                };
+                    bookingInfo = new Booking()
+                    {
+                        BookingDate = DateTime.Now,
+                        ReservedTo = DateTime.TryParse(ToDateTextBox.Text, out DateTime toDate) ? toDate 
+                                                                                                : throw new InvalidCastException(),
+                        ReservedFrom = DateTime.TryParse(FromDateTextBox.Text, out DateTime fromDate) ? fromDate 
+                                                                                                      : throw new InvalidCastException(),
+                        BookingMethod = (BookingMethods)Enum.Parse(typeof(BookingMethods), BookingMethodsCombobox.Text)
+                    };
+                }
+                catch (InvalidCastException ex)
+                {
+                    ErrorLogger.AddLog(new ErrorLogger.Error(ex.Message, ex.Source));
+                }
 
-                AddToDatabaseResult bookingInfoResults = DatabaseOperations.AddDataToHotelDatabase(bookingInfo);
+                bookingInfoResults = DatabaseOperations.AddDataToHotelDatabase(bookingInfo);
 
                 for (int index = 0; index < roomsfullList.Count; index++)
                 {
@@ -73,7 +94,6 @@ namespace HotelManagement.InnerContent
                 {
                     MessageBox.Show(OutputMessages.DataBaseInsertSuccess);
                 }
-
             }
             else
             {
@@ -93,40 +113,37 @@ namespace HotelManagement.InnerContent
             return localList;
         }
 
-
-        private bool CheckIfAllInformationFilled()
+        private List<T> GetChildsFromDependencyObject<T>(DependencyObject depObj) where T: UIElement
         {
-            List<TextBox> controls = new List<TextBox>();
+            List<T> controls = new List<T>();
+
+            for (int index = 0; index < VisualTreeHelper.GetChildrenCount(depObj); index++)
+            {
+                if (VisualTreeHelper.GetChild(depObj, index).GetType() == typeof(T))
+                {
+                    controls.Add(VisualTreeHelper.GetChild(depObj, index) as T);
+                }
+            }
+
+            return controls;
+        }
+
+        private bool CheckIfAllInputsFilled()
+        {
+            List<TextBox> textBoxes = new List<TextBox>();
+            List<ComboBox> comboBoxes = new List<ComboBox>();
 
             try
             {
-                object subcontentContent = addingNewGuestSubContent.Content;
-
-                if (addingNewGuestSubContent.Content.GetType() != typeof(Grid))
-                {
-                    throw new InvalidCastException();
-                }
-
-                Grid subcontentGrid = subcontentContent as Grid;
-
-                foreach (Control element in subcontentGrid.Children)
-                {
-                    if (element.GetType() == typeof(TextBox))
-                    {
-                        controls.Add(element as TextBox);
-                    }
-                }
-
-                controls.Add(this.ToDateTextBox);
-                controls.Add(this.FromDateTextBox);
+                textBoxes = GetChildsFromDependencyObject<TextBox>(addingNewGuestSubContent.Content as DependencyObject);
+                comboBoxes = GetChildsFromDependencyObject<ComboBox>(MainGrid);
             }
             catch (InvalidCastException ex)
             {
-                //TODO: replace it with logger
-                MessageBox.Show(ex.Message + ex.Source);
+                ErrorLogger.AddLog(new ErrorLogger.Error(ex.Message, ex.Source));
             }
 
-            return controls.All(x => !string.IsNullOrEmpty(x.Text));
+            return textBoxes.All(x => !string.IsNullOrEmpty(x.Text)) && comboBoxes.All(x => !string.IsNullOrEmpty(x.Text));
         }
     }
 }

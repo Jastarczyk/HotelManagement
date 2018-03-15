@@ -16,12 +16,32 @@ namespace HotelManagement.UserAccessUI
 
         private void RegisterButton_Click(object sender, RoutedEventArgs e)
         {
+            PerformRegisterAction();
+        }
+
+        private void Window_KeyUp(object sender, System.Windows.Input.KeyEventArgs e)
+        {
+            if (e.Key == System.Windows.Input.Key.Enter)
+            {
+                PerformRegisterAction();
+            }
+        }
+
+        private void BackButton_Click(object sender, RoutedEventArgs e)
+        {
+            WindowsManagement.registrationWindow.Hide();
+            WindowsManagement.loginWindow.Show();
+        }
+
+
+        private void PerformRegisterAction()
+        {
             userRegister = new UserRegister();
 
-            RegistrationResult registrationResult = userRegister.NewUser( UserTextBox.Text, 
-                                                                          PasswordTextBox.Password, 
-                                                                          ConfirmPasswordTextBox.Password, 
-                                                                          NameTextBox.Text, 
+            RegistrationResult registrationResult = userRegister.NewUser(UserTextBox.Text,
+                                                                          PasswordTextBox.Password,
+                                                                          ConfirmPasswordTextBox.Password,
+                                                                          NameTextBox.Text,
                                                                           SurnameTextBox.Text);
 
             MessageBox.Show(registrationResult.Message);
@@ -31,13 +51,6 @@ namespace HotelManagement.UserAccessUI
                 WindowsManagement.registrationWindow.Hide();
                 WindowsManagement.loginWindow.Show();
             }
-        
-        }
-
-        private void BackButton_Click(object sender, RoutedEventArgs e)
-        {
-            WindowsManagement.registrationWindow.Hide();
-            WindowsManagement.loginWindow.Show();
         }
     }
 }

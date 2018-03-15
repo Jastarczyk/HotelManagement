@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:HotelManagement.InnerContent.SubContent"
              mc:Ignorable="d" 
-             d:DesignHeight="250" Width="auto">
+             d:DesignHeight="245" Width="auto" d:DesignWidth="409">
 
     <Grid>
         <Grid.ColumnDefinitions>
@@ -38,7 +38,7 @@
                HorizontalAlignment="Right"
                Grid.Row="2"
                Grid.Column="0"/>
-        
+
         <Label Content="Address :" 
                VerticalAlignment="Center"
                HorizontalAlignment="Right"
@@ -78,18 +78,18 @@
                  Text="" 
                  VerticalAlignment="Center"/>
 
-        <TextBox x:Name="AddressTextBox" 
+        <TextBox x:Name="MobileNumberTextBox" 
                  Grid.Column="1" 
-                 Grid.Row="4"
+                 Grid.Row="3"
                  HorizontalAlignment="Stretch"
                  Height="20"
                  TextWrapping="Wrap" 
                  Text="" 
                  VerticalAlignment="Center"/>
 
-        <TextBox x:Name="MobileNumberTextBox" 
+        <TextBox x:Name="AddressTextBox" 
                  Grid.Column="1" 
-                 Grid.Row="3"
+                 Grid.Row="4"
                  HorizontalAlignment="Stretch"
                  Height="20"
                  TextWrapping="Wrap" 

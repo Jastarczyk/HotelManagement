@@ -28,31 +28,31 @@
                         Content="Dashboard" 
                         BorderThickness="0" 
                         Height="60" 
-                        Width="auto" Click="DashboardButton_Click"/>
+                        Width="auto" Click="DashboardButton_Click" LostFocus="DashboardButton_LostFocus"/>
 
                 <Button x:Name="GuestsButton" 
                         Content="Guests" 
                         Height="60" 
                         BorderThickness="0" 
-                        Width="auto" Click="GuestsButton_Click"/>
+                        Width="auto" Click="GuestsButton_Click" LostFocus="GuestsButton_LostFocus"/>
 
                 <Button x:Name="RoomsButton" 
                         Content="Rooms" 
                         Height="60" 
                         BorderThickness="0" 
-                        Width="auto" Click="RoomsButton_Click"/>
+                        Width="auto" Click="RoomsButton_Click" LostFocus="RoomsButton_LostFocus"/>
 
                 <Button x:Name="AdministrationButton" 
                         Content="Administarion" 
                         Height="60" 
                         BorderThickness="0" 
-                        Width="auto" Click="AdministrationButton_Click"/>
+                        Width="auto" Click="AdministrationButton_Click" LostFocus="AdministrationButton_LostFocus"/>
 
                 <Button x:Name="ExitButton" 
                         Content="Exit" 
                         Height="60" 
                         BorderThickness="0" 
-                        Width="auto" Click="ExitButton_Click"/>
+                        Width="auto" Click="ExitButton_Click" LostFocus="ExitButton_LostFocus"/>
 
             </StackPanel>
 

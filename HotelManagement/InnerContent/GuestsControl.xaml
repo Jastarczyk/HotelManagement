@@ -17,7 +17,8 @@
         </TabControl.Background>
         <TabItem Header="Register guest">
 
-            <Grid Background="White">
+            <Grid x:Name ="MainGrid" Background="White">
+
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"></ColumnDefinition>
                     <ColumnDefinition Width="0.4*"></ColumnDefinition>
@@ -62,34 +63,32 @@
                           VerticalAlignment="Top"
                           Height="165"
                           Width="175"/>
-
                 </GroupBox>
 
-                <GroupBox Grid.Column="0" 
-                          Header="Choose room" 
-                          HorizontalAlignment="Stretch"
-                          Margin="5"
-                          Grid.Row="1" 
-                          Grid.ColumnSpan="1"
-                          Grid.RowSpan="2"
-                          VerticalAlignment="Stretch">
+                <Label Content="Choose Room:" 
+                       HorizontalAlignment="Left"
+                       Margin="5,18,0,19"
+                       Grid.Row="1" 
+                       VerticalAlignment="Center" Width="101"/>
 
-                    <ComboBox x:Name="roomChooseComboBox"
-                              Width="auto"
-                              Height="20"
-                              VerticalAlignment="Top"
-                              Margin="5" 
-                              BorderBrush="White">
+                <ComboBox x:Name="roomChooseComboBox"
+                          Grid.Column="0"
+                          Grid.Row="1"
+                          Width="200"
+                          Height="22"
+                          HorizontalAlignment="Right"
+                          VerticalAlignment="Center"
+                          Margin="0,18,20,21" 
+                          BorderBrush="White">
 
-                        <ComboBox.Background>
-                            <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
-                                <GradientStop Color="#FFF0F0F0" Offset="0"/>
-                                <GradientStop Color="White" Offset="1"/>
-                            </LinearGradientBrush>
-                        </ComboBox.Background>
+                    <ComboBox.Background>
+                        <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
+                            <GradientStop Color="#FFF0F0F0" Offset="0"/>
+                            <GradientStop Color="White" Offset="1"/>
+                        </LinearGradientBrush>
+                    </ComboBox.Background>
 
-                    </ComboBox>
-                </GroupBox>
+                </ComboBox>
 
                 <TextBox x:Name="FromDateTextBox"
                          Grid.Column="1"
@@ -128,6 +127,20 @@
                         Height="25" 
                         Click="AddButton_Click"/>
 
+                <Label Content="Booking method:" 
+                       HorizontalAlignment="Left"
+                       Margin="5,18,0,0"
+                       Grid.Row="2" 
+                       VerticalAlignment="top" Height="26" Width="101"/>
+
+
+                <ComboBox x:Name="BookingMethodsCombobox"
+                          HorizontalAlignment="Right" 
+                          Margin="0,21,20,20" 
+                          Grid.Row="2" 
+                          VerticalAlignment="Center" 
+                          Width="200" 
+                          Height="22"/>
             </Grid>
         </TabItem>
 

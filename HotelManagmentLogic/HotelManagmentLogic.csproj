@@ -63,6 +63,7 @@
     <Compile Include="Enums\UserType.cs" />
     <Compile Include="DatabaseAccess\RoomDbTableOperations.cs" />
     <Compile Include="Entity\OperationResults\AddToDatabaseResult.cs" />
+    <Compile Include="Logger\ErrorLogger.cs" />
     <Compile Include="LoginScreenLogic\Abstraction\UserAccess.cs" />
     <Compile Include="LoginScreenLogic\UserAccessActionResults\LoginResult.cs" />
     <Compile Include="LoginScreenLogic\UserAccessActionResults\RegistrationResult.cs" />
