@@ -12,7 +12,7 @@ namespace HotelManagmentLogic.LoginScreenLogic
 {
     public class UserLogin : UserAccess
     {
-        Security security = new Security();
+        UserSecurity security = new UserSecurity();
 
         public LoginResult Login(string userName, string password)
         {

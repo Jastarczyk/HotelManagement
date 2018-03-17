@@ -4,7 +4,7 @@ using System.Security.Cryptography;
 
 namespace HotelManagmentLogic.DatabaseAccess
 {
-    internal class Security
+    internal class UserSecurity
     {
         Random random = new Random();
 

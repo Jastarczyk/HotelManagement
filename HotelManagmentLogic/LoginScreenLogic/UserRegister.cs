@@ -28,7 +28,7 @@ namespace HotelManagmentLogic.LoginScreenLogic
             }
 
 
-            Security security = new Security();
+            UserSecurity security = new UserSecurity();
 
             Tuple<string, byte[]> hashingResults = security.HashPasswordSHA256(password);
 
