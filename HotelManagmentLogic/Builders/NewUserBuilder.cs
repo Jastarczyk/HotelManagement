@@ -53,5 +53,11 @@ namespace HotelManagmentLogic.Builders
             user.UserType = userType;
             return this;
         }
+
+        public NewUserBuilder GetSaltValue(string saltValue)
+        {
+            user.SaltValue = saltValue;
+            return this;
+        }
     }
 }

@@ -66,7 +66,7 @@ namespace HotelManagement.InnerContent
                 }
                 catch (InvalidCastException ex)
                 {
-                    ErrorLogger.AddLog(new ErrorLogger.Error(ex.Message, ex.Source));
+                    ErrorLogger.AddLog(new ErrorLogger.Error(ex));
                 }
 
                 bookingInfoResults = DatabaseOperations.AddDataToHotelDatabase(bookingInfo);
@@ -140,7 +140,7 @@ namespace HotelManagement.InnerContent
             }
             catch (InvalidCastException ex)
             {
-                ErrorLogger.AddLog(new ErrorLogger.Error(ex.Message, ex.Source));
+                ErrorLogger.AddLog(new ErrorLogger.Error(ex));
             }
 
             return textBoxes.All(x => !string.IsNullOrEmpty(x.Text)) && comboBoxes.All(x => !string.IsNullOrEmpty(x.Text));

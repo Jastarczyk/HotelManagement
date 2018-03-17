@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace HotelManagmentLogic.Logger
 {
@@ -15,10 +11,10 @@ namespace HotelManagmentLogic.Logger
             public string ErrorSource { private set; get; }
             public DateTime ErrorDate { private set; get; }
 
-            public Error(string errorMessage, string errorSource)
+            public Error(Exception exception)
             {
-                ErrorMessage = errorMessage;
-                ErrorSource = errorSource;
+                ErrorMessage = exception.Message;
+                ErrorSource = exception.Source;
                 ErrorDate = DateTime.Now;
             }
         }
@@ -33,7 +29,6 @@ namespace HotelManagmentLogic.Logger
                 CreateLoggerFile(directoryPath);
             }
 
-            //TODO should use XML logger? Remove magic strings! Try catch needed in case of emergency
             using (TextWriter textWriter = new StreamWriter(directoryPath))
             {
                 textWriter.WriteLine(string.Format("Date: {0} | Message: {1} | Source: {2}", error.ErrorDate, error.ErrorMessage, error.ErrorSource));

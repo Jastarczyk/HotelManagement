@@ -57,6 +57,7 @@
     <Compile Include="Builders\NewUserBuilder.cs" />
     <Compile Include="Configuration\Config.cs" />
     <Compile Include="Configuration\OutputMessages.cs" />
+    <Compile Include="DatabaseAccess\Security.cs" />
     <Compile Include="Entity\CommonOperations\DatabaseOperations.cs" />
     <Compile Include="Entity\DatabaseConfig\DatabaseInfo.cs" />
     <Compile Include="Enums\RoomClass.cs" />

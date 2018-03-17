@@ -1,4 +1,5 @@
-﻿using HotelManagmentLogic.Entity.DatabaseConfig;
+﻿using HotelManagmentLogic.DatabaseAccess;
+using HotelManagmentLogic.Entity.DatabaseConfig;
 using HotelManagmentLogic.Logger;
 using HotelManagmentLogic.LoginScreenLogic;
 using HotelManagmentLogic.LoginScreenLogic.UserAccessActionResults;
@@ -29,7 +30,6 @@ namespace HotelManagement.UserAccessUI
         private void LoginButton_Click(object sender, RoutedEventArgs e)
         {
             PerformLoginAction();
-            ErrorLogger.AddLog(new ErrorLogger.Error("dupa", "dupa"));
         }
 
         private void RegisterButton_Click(object sender, RoutedEventArgs e)

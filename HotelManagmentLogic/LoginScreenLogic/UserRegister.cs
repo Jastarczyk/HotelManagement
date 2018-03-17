@@ -1,8 +1,7 @@
 ﻿using HotelManagmentLogic.Builders;
 using HotelManagmentLogic.Configuration;
-using HotelManagmentLogic.Entity;
+using HotelManagmentLogic.DatabaseAccess;
 using HotelManagmentLogic.Entity.CommonOperations;
-using HotelManagmentLogic.Entity.DatabaseConfig;
 using HotelManagmentLogic.GuestsControlLogic;
 using HotelManagmentLogic.LoginScreenLogic.Abstraction;
 using HotelManagmentLogic.LoginScreenLogic.UserAccessActionResults;
@@ -21,18 +20,28 @@ namespace HotelManagmentLogic.LoginScreenLogic
                 return BuildOperationResult(OutputMessages.PasswordNoMatch, false) as RegistrationResult;
             }
 
-            var localUser = new NewUserBuilder().SetUsername(userName)
-                                                .SetPassword(password)
-                                                .SetName(name)
-                                                .SetSurname(surname)
-                                                .Build();
-
-            Tuple<bool, string> userValidation = CheckUserValidation(localUser.Name, localUser.Password);
+            Tuple<bool, string> userValidation = CheckUserValidation(userName, password);
 
             if (!userValidation.Item1)
             {
                 return BuildOperationResult(userValidation.Item2, false) as RegistrationResult;
             }
+
+
+            Security security = new Security();
+
+            Tuple<string, byte[]> hashingResults = security.HashPasswordSHA256(password);
+
+            string saltValue = hashingResults.Item1;
+            string hashedPassword = String.Join(String.Empty, hashingResults.Item2.ToList().Select( x => Convert.ToChar(x)));
+
+            var localUser = new NewUserBuilder().SetUsername(userName)
+                                                .SetPassword(hashedPassword)
+                                                .GetSaltValue(saltValue)
+                                                .SetName(name)
+                                                .SetSurname(surname)
+                                                .Build();
+
             try
             {
                 //TODO check if can take duplicate user or exception because its a key for user
@@ -46,6 +55,7 @@ namespace HotelManagmentLogic.LoginScreenLogic
 
             catch (Exception ex)
             {
+                Logger.ErrorLogger.AddLog(new Logger.ErrorLogger.Error(ex));
                 return BuildOperationResult(OutputMessages.InternalError, false, ex) as RegistrationResult;
             }
         }
