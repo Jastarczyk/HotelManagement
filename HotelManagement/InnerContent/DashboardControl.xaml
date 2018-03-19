@@ -34,15 +34,6 @@
                Margin="10,10,0,0"
                />
 
-        <Calendar  Grid.Column="1" 
-                   Margin="10,10,0,0" 
-                   VerticalAlignment="Top" 
-                   Height="165" 
-                   Width="290" 
-                   HorizontalAlignment="Left"
-                   FirstDayOfWeek="Monday"
-                   Grid.Row="1"/>
-
         <Rectangle Fill="DarkGray" 
                    HorizontalAlignment="Center" 
                    Height="1" 

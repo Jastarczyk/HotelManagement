@@ -9,9 +9,12 @@ using HotelManagmentLogic.Models;
 using HotelManagmentLogic.Models.Acommodation;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Data;
 using System.Windows.Media;
 
 namespace HotelManagement.InnerContent
@@ -57,10 +60,8 @@ namespace HotelManagement.InnerContent
                     bookingInfo = new Booking()
                     {
                         BookingDate = DateTime.Now,
-                        ReservedTo = DateTime.TryParse(ToDateTextBox.Text, out DateTime toDate) ? toDate 
-                                                                                                : throw new InvalidCastException(),
-                        ReservedFrom = DateTime.TryParse(FromDateTextBox.Text, out DateTime fromDate) ? fromDate 
-                                                                                                      : throw new InvalidCastException(),
+                        ReservedTo = ToDatePicker.SelectedDate?? DateTime.MaxValue,
+                        ReservedFrom = FromDatePicker.SelectedDate ?? DateTime.MinValue.Date,
                         BookingMethod = (BookingMethods)Enum.Parse(typeof(BookingMethods), BookingMethodsCombobox.Text)
                     };
                 }
@@ -90,10 +91,8 @@ namespace HotelManagement.InnerContent
 
                 AddToDatabaseResult buildedGuestResults = DatabaseOperations.AddDataToHotelDatabase(buildedGuest);
 
-                if (buildedGuestResults.OperationSuccess && bookingInfoResults.OperationSuccess)
-                {
-                    MessageBox.Show(OutputMessages.DataBaseInsertSuccess);
-                }
+                MessageBox.Show((buildedGuestResults.OperationSuccess && bookingInfoResults.OperationSuccess) ? 
+                    OutputMessages.DataBaseInsertSuccess : OutputMessages.FailedAddedToDatabase);
             }
             else
             {
@@ -130,8 +129,11 @@ namespace HotelManagement.InnerContent
 
         private bool CheckIfAllInputsFilled()
         {
+            //TODO : make this method more ELASTIC for changes (should take all control to 1 list and then check for valid input)
             List<TextBox> textBoxes = new List<TextBox>();
             List<ComboBox> comboBoxes = new List<ComboBox>();
+            List<DatePicker> datePickers = new List<DatePicker>()
+            { this.FromDatePicker, this.ToDatePicker };
 
             try
             {
@@ -143,7 +145,10 @@ namespace HotelManagement.InnerContent
                 ErrorLogger.AddLog(new ErrorLogger.Error(ex));
             }
 
-            return textBoxes.All(x => !string.IsNullOrEmpty(x.Text)) && comboBoxes.All(x => !string.IsNullOrEmpty(x.Text));
+            return textBoxes.All(x => !string.IsNullOrEmpty(x.Text)) 
+                   && comboBoxes.All(x => !string.IsNullOrEmpty(x.Text))
+                   && datePickers.All(x => x.SelectedDate != null);
         }
+
     }
 }

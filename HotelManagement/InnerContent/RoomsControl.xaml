@@ -4,9 +4,62 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:HotelManagement.InnerContent"
+             xmlns:SubContent="clr-namespace:HotelManagement.InnerContent.SubContent"
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300">
+             d:DesignHeight="350" d:DesignWidth="600" Background="White">
     <Grid>
-            
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.1*"/>
+            <RowDefinition Height="0.1*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Label Content="Rooms catalog"
+               HorizontalAlignment="Stretch"
+               VerticalAlignment="Stretch" FontSize="14">
+            <Label.Background>
+                <LinearGradientBrush EndPoint="1,-1" StartPoint="0,1">
+                    <GradientStop Color="AliceBlue" Offset="0.149"/>
+                    <GradientStop Color="White" Offset="1"/>
+                </LinearGradientBrush>
+            </Label.Background>
+        </Label>
+
+        <Button x:Name="NavigateBackButton"
+                Content="Back"
+                Width="49"
+                Height="28"
+                HorizontalAlignment="Left" 
+                Grid.Row="1" 
+                VerticalAlignment="Top"
+                Cursor="Hand" BorderBrush="#FFC3C3C3" Background="White"/>
+
+        <Button x:Name="NavigateNextButton" 
+                Content ="Next"
+                HorizontalAlignment="Left" 
+                Margin="49,0,0,0" 
+                Grid.Row="1"
+                VerticalAlignment="Top" 
+                Width="50"
+                Height="28" 
+                BorderBrush="#FFC3C3C3" 
+                Background="White"/>
+
+        <SubContent:RoomCatalogControl
+                        x:Name="addingNewGuestSubContent"
+                        Grid.Column="0"
+                        Grid.Row="2"
+                        Grid.ColumnSpan="2"
+                        HorizontalAlignment="Stretch"
+                        Height="auto" 
+                        VerticalAlignment="Stretch" 
+                        Width="auto"/>
+
+
     </Grid>
 </UserControl>

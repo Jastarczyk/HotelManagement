@@ -57,12 +57,13 @@
                           Grid.Row="0" 
                           VerticalAlignment="Stretch">
 
-                    <Calendar HorizontalAlignment="Center"
+                    <Calendar x:Name="InnerCalendar"
+                          HorizontalAlignment="Center"
                           Grid.Row="0"
                           Grid.Column="1"
                           VerticalAlignment="Top"
                           Height="165"
-                          Width="175"/>
+                          Width="175" FirstDayOfWeek="Monday"/>
                 </GroupBox>
 
                 <Label Content="Choose Room:" 
@@ -90,31 +91,21 @@
 
                 </ComboBox>
 
-                <TextBox x:Name="FromDateTextBox"
-                         Grid.Column="1"
-                         IsReadOnly="True"
-                         Cursor="Hand"
-                         HorizontalAlignment="Center" 
-                         Height="20" 
-                         Grid.Row="1" 
-                         TextWrapping="Wrap" 
-                         TextAlignment="Center"
-                         Text="25/04/2018" 
-                         VerticalAlignment="Center" 
-                         Width="75"/>
+                <Label Content="From date:" 
+                       Grid.Column="1"
+                       HorizontalAlignment="Center"
+                       Margin="10,5,50,0" 
+                       VerticalAlignment="Top" 
+                       Width="75" Height="25" 
+                       Grid.Row="1"/>
 
-                <TextBox x:Name="ToDateTextBox"
-                         Grid.Column="2"
-                         Cursor="Hand"
-                         IsReadOnly="False"
-                         HorizontalAlignment="Center" 
-                         Height="20" 
-                         Grid.Row="1" 
-                         TextWrapping="Wrap" 
-                         TextAlignment="Center"
-                         Text="28/04/2018" 
-                         VerticalAlignment="Center" 
-                         Width="75"/>
+                <Label Content="To date:" 
+                       Grid.Column="2"
+                       HorizontalAlignment="Center"
+                       Margin="10,5,40,0" 
+                       Grid.Row="1" 
+                       VerticalAlignment="Top" 
+                       Width="74"/>
 
                 <Button x:Name="addButton"
                         Content="Add" 
@@ -141,6 +132,19 @@
                           VerticalAlignment="Center" 
                           Width="200" 
                           Height="22"/>
+                
+                <DatePicker x:Name="FromDatePicker" Grid.Column="1" 
+                            HorizontalAlignment="Left"
+                            Margin="10,30,0,0" 
+                            Grid.Row="1"
+                            VerticalAlignment="Top"/>
+                
+                <DatePicker x:Name="ToDatePicker" Grid.Column="2" 
+                            HorizontalAlignment="Left"
+                            Margin="10,30,0,0"
+                            Grid.Row="1" 
+                            VerticalAlignment="Top"/>
+
             </Grid>
         </TabItem>
 

@@ -36,6 +36,7 @@ namespace HotelManagmentLogic.Configuration
         public const string NoUserInDataBase = "Username don't exists";
         public const string IncorrectPassowrd = "Incorrect password";
         public const string InternalError = "Internal error. If problem will repeat, concact with support";
+        public const string FailedAddedToDatabase = "Can't add data to database";
         public const string InvalidArgumentName = "Invalid Argument Name: ";
         public const string MissingArgumentsMessage = "Please fill all information";
 

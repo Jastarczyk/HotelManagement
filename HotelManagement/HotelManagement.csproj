@@ -78,6 +78,9 @@
     <Compile Include="InnerContent\SubContent\GuestRegisterControl.xaml.cs">
       <DependentUpon>GuestRegisterControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="InnerContent\SubContent\RoomCatalogControl.xaml.cs">
+      <DependentUpon>RoomCatalogControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UserAccessUI\RegisterWindow.xaml.cs">
       <DependentUpon>RegisterWindow.xaml</DependentUpon>
     </Compile>
@@ -99,6 +102,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="InnerContent\SubContent\GuestRegisterControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="InnerContent\SubContent\RoomCatalogControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -159,6 +166,15 @@
       <Name>HotelManagmentLogic</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Resources\Img\if_001_06_9593.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Img\Rooms\pexels-photo-164595.jpeg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Img\if_icon-ios7-arrow-back_211686.png" />
+    <Resource Include="Resources\Img\if_icon-ios7-arrow-forward_211688.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
