@@ -71,6 +71,7 @@ namespace HotelManagement.InnerContent
         {
              var urlList = HotelManagmentLogic.Helpers.DirectoryOperations.GetCurrentRoomImagesURL(room);
 
+            throw new NotImplementedException();
 
         }
     }

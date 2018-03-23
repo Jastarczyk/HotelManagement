@@ -1,4 +1,5 @@
-﻿using HotelManagmentLogic.Models.Acommodation;
+﻿using HotelManagmentLogic.Configuration;
+using HotelManagmentLogic.Models.Acommodation;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -16,13 +17,23 @@ namespace HotelManagmentLogic.Helpers
 
             try
             {
-                string imagesPath = Directory.Exists(Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName + @"\Resources\Img\Rooms\Room" + room.RoomNumber.ToString()) ?
-                                    Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName + @"\Resources\Img\Rooms\Room" + room.RoomNumber.ToString()
-                                   : throw new FileNotFoundException();
+                string imagesPath = Directory.Exists(Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName + Config.RoomsImagePath + room.RoomNumber.ToString()) ?
+                                    Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName + Config.RoomsImagePath + room.RoomNumber.ToString()
+                                   :  string.Empty;
 
-                string[] foundedFiles = Directory.GetFiles(imagesPath);
+                if (string.IsNullOrEmpty(imagesPath))
+                {
+                    throw new FileNotFoundException();
+                }
 
-                images = foundedFiles.Where(x => Path.GetExtension(x).Equals(".jpeg")).ToList();
+                Directory.GetFiles(imagesPath).ToList().ForEach((x) =>
+                {
+                    if (Config.PossibleImageFileExtension.Contains(Path.GetExtension(x)))
+                    {
+                        images.Add(x);
+                    }
+
+                });
             }
             catch (FileNotFoundException ex)
             {

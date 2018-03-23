@@ -19,9 +19,7 @@ namespace HotelManagement.UserAccessUI
 
             if (!DatabaseInfo.CheckDataBaseConnection())
             {
-                MessageBox.Show(string.Format("{0} : {1}", HotelManagmentLogic.Configuration.OutputMessages.DataBaseConnectionError,
-                                                           DatabaseInfo.GetDataBaseName()));
-
+                MessageBox.Show(HotelManagmentLogic.Configuration.OutputMessages.DataBaseConnectionError, DatabaseInfo.GetDataBaseName());
                 Application.Current.Shutdown();
             }
 

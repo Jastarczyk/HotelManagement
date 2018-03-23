@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HotelManagmentLogic.Configuration;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,17 +11,32 @@ namespace HotelManagmentLogic.Entity.DatabaseConfig
     {
         public static bool CheckDataBaseConnection()
         {
-            using (HotelContext hotelContext = new HotelContext())
+            try
             {
-                return hotelContext.Database.Exists();
+                using (HotelContext hotelContext = new HotelContext())
+                {
+                    return hotelContext.Database.Exists();
+                }
+            }
+            catch (Exception)
+            {
+                return false;
             }
         }
 
         public static string GetDataBaseName()
         {
-            using (HotelContext hotelContext = new HotelContext())
+            try
             {
-                return hotelContext.Database.Connection.Database;
+                using (HotelContext hotelContext = new HotelContext())
+                {
+                    return hotelContext.Database.Connection.Database;
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger.ErrorLogger.AddLog(new Logger.ErrorLogger.Error(ex));
+                return OutputMessages.DataBaseConnectionError;
             }
         }
     }

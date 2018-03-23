@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Text;
 
 namespace HotelManagmentLogic.Logger
 {
@@ -21,17 +22,20 @@ namespace HotelManagmentLogic.Logger
 
         public static void AddLog(Error error)
         {
-            string directoryPath = (string.Format("{0}\\{1}\\{2}", AppDomain.CurrentDomain.BaseDirectory,
-                                                                   Configuration.Config.LoggerFolder,
-                                                                   Configuration.Config.LoggerFileName));
+            StringBuilder stringBuilder = new StringBuilder();
+
+            string directoryPath = (string.Format("{0}{1}\\{2}", AppDomain.CurrentDomain.BaseDirectory,
+                                                                 Configuration.Config.LoggerFolder,
+                                                                 Configuration.Config.LoggerFileName));
             if (!File.Exists(directoryPath))
             {
                 CreateLoggerFile(directoryPath);
             }
 
-            using (TextWriter textWriter = new StreamWriter(directoryPath))
+            using (TextWriter textWriter = new StreamWriter(directoryPath, true))
             {
-                textWriter.WriteLine(string.Format("Date: {0} | Message: {1} | Source: {2}", error.ErrorDate, error.ErrorMessage, error.ErrorSource));
+                textWriter.WriteLine(string.Format("Date: {0} | Message: {1} | Source: {2}", 
+                                         error.ErrorDate, error.ErrorMessage, error.ErrorSource));
             }
 
         }
@@ -39,7 +43,8 @@ namespace HotelManagmentLogic.Logger
         private static void CreateLoggerFile(string directoryPath)
         {
             Directory.CreateDirectory(AppDomain.CurrentDomain.BaseDirectory + Configuration.Config.LoggerFolder);
-            File.Create(directoryPath);
+            FileStream fileCreator = File.Create(directoryPath);
+            fileCreator.Dispose();
         }
     }
 }

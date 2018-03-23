@@ -19,6 +19,13 @@ namespace HotelManagmentLogic.Configuration
         #endregion
 
         public const string SpecialCharactersPattern = "^[a-zA-Z0-9]+$";
+        public readonly static string[] PossibleImageFileExtension = { ".img", ".jpeg", ".png" };
+
+        #region Directory path settings
+
+        public const string RoomsImagePath = @"\Resources\Img\Rooms\Room";
+
+        #endregion
 
         #region Logger configuration
 
