@@ -17,11 +17,13 @@ namespace HotelManagement.UserAccessUI
             InitializeComponent();
             windowsManagement = new WindowsManagement(this);
 
-            if (!DatabaseInfo.CheckDataBaseConnection())
-            {
-                MessageBox.Show(HotelManagmentLogic.Configuration.OutputMessages.DataBaseConnectionError, DatabaseInfo.GetDataBaseName());
-                Application.Current.Shutdown();
-            }
+            //TODO uncomment this
+
+            //if (!DatabaseInfo.CheckDataBaseConnection())
+            //{
+            //    MessageBox.Show(HotelManagmentLogic.Configuration.OutputMessages.DataBaseConnectionError, DatabaseInfo.GetDataBaseName());
+            //    Application.Current.Shutdown();
+            //}
 
         }
 

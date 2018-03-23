@@ -29,17 +29,19 @@ namespace HotelManagement.InnerContent
         public RoomsControl()
         {
             InitializeComponent();
+
             IEnumerable<object> dbReadResult = DatabaseOperations.GetFullTableBaseOnType<Room>().ReturnedData;
 
             foreach (object obj in dbReadResult)
-                { availableRoom.Add(obj as Room); }
-
+            {
+                availableRoom.Add(obj as Room);
+            }
             SetRoomInformation(availableRoom.FirstOrDefault());
         }
 
         private void NavigateNextButton_Click(object sender, RoutedEventArgs e)
         {
-            if (pageIndex < availableRoom.Count -1)
+            if (pageIndex < availableRoom.Count - 1)
             {
                 pageIndex++;
                 SetRoomInformation(availableRoom[pageIndex]);
@@ -57,22 +59,31 @@ namespace HotelManagement.InnerContent
 
         private void SetRoomInformation(Room room)
         {
-            //TODO rework this to binding source
-            addingNewGuestSubContent.numberTextBox.Text = room.RoomNumber.ToString();
-            addingNewGuestSubContent.specialNameTextBox.Text = room.SpecialName;
-            addingNewGuestSubContent.areaTextBox.Text = room.Area.ToString();
-            addingNewGuestSubContent.bedAmountTextBox.Text = room.BedsAmount.ToString();
-            addingNewGuestSubContent.hasTVCheckBox.IsChecked = room.HasTelevistion;
-            addingNewGuestSubContent.hasBalconyCheckBox.IsChecked = room.HasBalcon;
-            addingNewGuestSubContent.ImageHolder.Source = (ImageSource)GetCurrentRoomImages(room).FirstOrDefault();
+            if (room != null)
+            {
+                //TODO rework this to binding source
+                addingNewGuestSubContent.numberTextBox.Text = room.RoomNumber.ToString();
+                addingNewGuestSubContent.specialNameTextBox.Text = room.SpecialName;
+                addingNewGuestSubContent.areaTextBox.Text = room.Area.ToString();
+                addingNewGuestSubContent.bedAmountTextBox.Text = room.BedsAmount.ToString();
+                addingNewGuestSubContent.hasTVCheckBox.IsChecked = room.HasTelevistion;
+                addingNewGuestSubContent.hasBalconyCheckBox.IsChecked = room.HasBalcon;
+                addingNewGuestSubContent.ImageHolder.Source = GetCurrentRoomImages(room).FirstOrDefault() as ImageSource;
+            }
         }
 
         private List<object> GetCurrentRoomImages(Room room)
         {
-             var urlList = HotelManagmentLogic.Helpers.DirectoryOperations.GetCurrentRoomImagesURL(room);
+            List<object> imageList = new List<object>();
 
-            throw new NotImplementedException();
+            var urlList = HotelManagmentLogic.Helpers.DirectoryOperations.GetCurrentRoomImagesURL(room);
 
+            foreach (string url in urlList)
+            {
+                imageList.Add(new BitmapImage(new Uri(url)));
+            }
+
+            return imageList;
         }
     }
 }
