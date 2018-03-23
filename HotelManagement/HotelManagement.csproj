@@ -63,6 +63,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="HotelDatabaseDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>HotelDatabaseDataSet.xsd</DependentUpon>
+    </Compile>
     <Compile Include="InnerContent\AdministrationControl.xaml.cs">
       <DependentUpon>AdministrationControl.xaml</DependentUpon>
     </Compile>
@@ -154,6 +159,17 @@
     <None Include="App.config">
       <SubType>Designer</SubType>
     </None>
+    <None Include="HotelDatabaseDataSet.xsc">
+      <DependentUpon>HotelDatabaseDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="HotelDatabaseDataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>HotelDatabaseDataSet.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="HotelDatabaseDataSet.xss">
+      <DependentUpon>HotelDatabaseDataSet.xsd</DependentUpon>
+    </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -170,11 +186,14 @@
     <Resource Include="Resources\Img\if_001_06_9593.gif" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\Img\Rooms\pexels-photo-164595.jpeg" />
+    <Resource Include="Resources\Img\Rooms\Room1\1.jpeg" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\Img\if_icon-ios7-arrow-back_211686.png" />
     <Resource Include="Resources\Img\if_icon-ios7-arrow-forward_211688.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="DataSets\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

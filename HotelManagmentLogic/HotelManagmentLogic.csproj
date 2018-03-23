@@ -60,6 +60,8 @@
     <Compile Include="DatabaseAccess\UserSecurity.cs" />
     <Compile Include="Entity\CommonOperations\DatabaseOperations.cs" />
     <Compile Include="Entity\DatabaseConfig\DatabaseInfo.cs" />
+    <Compile Include="Entity\OperationResults\IDatabaseResult.cs" />
+    <Compile Include="Entity\OperationResults\ReadDatabaseResult.cs" />
     <Compile Include="Enums\RoomClass.cs" />
     <Compile Include="Enums\UserType.cs" />
     <Compile Include="DatabaseAccess\RoomDbTableOperations.cs" />
@@ -83,6 +85,7 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\DirectoryOperations.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.Config">

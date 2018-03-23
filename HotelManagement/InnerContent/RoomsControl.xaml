@@ -37,7 +37,7 @@
                 HorizontalAlignment="Left" 
                 Grid.Row="1" 
                 VerticalAlignment="Top"
-                Cursor="Hand" BorderBrush="#FFC3C3C3" Background="White"/>
+                Cursor="Hand" BorderBrush="#FFC3C3C3" Background="White" Click="NavigateBackButton_Click"/>
 
         <Button x:Name="NavigateNextButton" 
                 Content ="Next"
@@ -48,7 +48,7 @@
                 Width="50"
                 Height="28" 
                 BorderBrush="#FFC3C3C3" 
-                Background="White"/>
+                Background="White" Click="NavigateNextButton_Click"/>
 
         <SubContent:RoomCatalogControl
                         x:Name="addingNewGuestSubContent"

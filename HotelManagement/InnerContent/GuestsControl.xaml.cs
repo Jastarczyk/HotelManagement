@@ -2,6 +2,7 @@
 using HotelManagmentLogic.Configuration;
 using HotelManagmentLogic.DatabaseAccess;
 using HotelManagmentLogic.Entity.CommonOperations;
+using HotelManagmentLogic.Entity.DatabaseConfig;
 using HotelManagmentLogic.Enums;
 using HotelManagmentLogic.GuestsControlLogic;
 using HotelManagmentLogic.Logger;
@@ -9,12 +10,10 @@ using HotelManagmentLogic.Models;
 using HotelManagmentLogic.Models.Acommodation;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
+using System.Data.Entity;
 using System.Linq;
-using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
 using System.Windows.Media;
 
 namespace HotelManagement.InnerContent
@@ -150,5 +149,14 @@ namespace HotelManagement.InnerContent
                    && datePickers.All(x => x.SelectedDate != null);
         }
 
+        private void UserControl_Loaded(object sender, RoutedEventArgs e)
+        {
+            guestDataGrid.ItemsSource = DatabaseOperations.GetFullTableBaseOnType<Guest>().ReturnedData;
+        }
+
+        private void RefreshButton_Click(object sender, RoutedEventArgs e)
+        {
+            UserControl_Loaded(sender, e);
+        }
     }
 }

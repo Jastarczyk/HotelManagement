@@ -4,11 +4,15 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:HotelManagement.InnerContent"
-             xmlns:SubContent="clr-namespace:HotelManagement.InnerContent.SubContent" x:Class="HotelManagement.InnerContent.GuestsControl"
-             mc:Ignorable="d" BorderThickness="0">
+             xmlns:SubContent="clr-namespace:HotelManagement.InnerContent.SubContent" xmlns:HotelManagement="clr-namespace:HotelManagement" x:Class="HotelManagement.InnerContent.GuestsControl"
+             mc:Ignorable="d" BorderThickness="0" Loaded="UserControl_Loaded">
+    <UserControl.Resources>
+        <HotelManagement:HotelDatabaseDataSet x:Key="hotelDatabaseDataSet"/>
+        <CollectionViewSource x:Key="guestViewSource" Source="{Binding Guest, Source={StaticResource hotelDatabaseDataSet}}"/>
+    </UserControl.Resources>
 
 
-    <TabControl HorizontalAlignment="Left" Height="350" VerticalAlignment="Top" Width="600" BorderThickness="0" Margin="0,10,0,0">
+    <TabControl HorizontalAlignment="Left" Height="350" VerticalAlignment="Top" Width="600" BorderThickness="0" Margin="0,-10,0,0">
         <TabControl.Background>
             <RadialGradientBrush>
                 <GradientStop Color="#FFE6E6E6" Offset="1"/>
@@ -20,15 +24,15 @@
             <Grid x:Name ="MainGrid" Background="White">
 
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"></ColumnDefinition>
-                    <ColumnDefinition Width="0.4*"></ColumnDefinition>
-                    <ColumnDefinition Width="0.4*"></ColumnDefinition>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="0.4*"/>
+                    <ColumnDefinition Width="0.4*"/>
                 </Grid.ColumnDefinitions>
 
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="auto"></RowDefinition>
-                    <RowDefinition Height="*"></RowDefinition>
-                    <RowDefinition Height="*"></RowDefinition>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
 
                 <GroupBox Header="Add new guest" 
@@ -132,13 +136,13 @@
                           VerticalAlignment="Center" 
                           Width="200" 
                           Height="22"/>
-                
+
                 <DatePicker x:Name="FromDatePicker" Grid.Column="1" 
                             HorizontalAlignment="Left"
                             Margin="10,30,0,0" 
                             Grid.Row="1"
                             VerticalAlignment="Top"/>
-                
+
                 <DatePicker x:Name="ToDatePicker" Grid.Column="2" 
                             HorizontalAlignment="Left"
                             Margin="10,30,0,0"
@@ -149,7 +153,21 @@
         </TabItem>
 
         <TabItem Header="Display Guests">
-            <Grid Background="#FFE5E5E5"/>
+            <Grid Background="#FFE5E5E5" DataContext="{StaticResource guestViewSource}">
+                <Label Content="Registered Guests" HorizontalAlignment="Left" VerticalAlignment="Top" Height="38" Width="161" FontSize="18"/>
+                <Button x:Name="RefreshButton" Content="Refresh" HorizontalAlignment="Left" Margin="531,0,0,0" VerticalAlignment="Top" Width="65" Height="38" Click="RefreshButton_Click"/>
+                
+                <DataGrid x:Name="guestDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding}" Margin="0,38,0,0" RowDetailsVisibilityMode="VisibleWhenSelected">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn x:Name="iDColumn" Binding="{Binding ID}" Header="ID" IsReadOnly="True" Width="25"/>
+                        <DataGridTextColumn x:Name="nameColumn" Binding="{Binding Name}" Header="Name" Width="100"/>
+                        <DataGridTextColumn x:Name="surnameColumn" Binding="{Binding Surname}" Header="Surname" Width="*"/>
+                        <DataGridTextColumn x:Name="addressColumn" Binding="{Binding Address}" Header="Address" Width="*"/>
+                        <DataGridTextColumn x:Name="emailColumn" Binding="{Binding Email}" Header="Email" Width="*"/>
+                        <DataGridTextColumn x:Name="telephoneNumberColumn" Binding="{Binding TelephoneNumber}" Header="Telephone Number" Width="*"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </Grid>
         </TabItem>
     </TabControl>
 </UserControl>

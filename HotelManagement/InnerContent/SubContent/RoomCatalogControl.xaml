@@ -28,12 +28,12 @@
                Height="auto" 
                Width="auto" FontSize="20"/>
 
-        <Image HorizontalAlignment="Stretch" 
+        <Image x:Name="ImageHolder" HorizontalAlignment="Stretch" 
                VerticalAlignment="Stretch"
                Margin="10"
                Grid.Column="1"
                Grid.RowSpan="6"
-               Source="/HotelManagement;component/Resources/Img/Rooms/pexels-photo-164595.jpeg"/>
+               Source="/HotelManagement;component/Resources/Img/Rooms/Room1/1.jpeg"/>
         <!-- TODO : insertbinding-->
 
         <Label Content="Room number" 
