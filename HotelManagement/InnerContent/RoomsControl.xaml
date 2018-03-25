@@ -31,24 +31,56 @@
         </Label>
 
         <Button x:Name="NavigateBackButton"
-                Content="Back"
+                Content=""
                 Width="49"
-                Height="28"
+                Height="29"
                 HorizontalAlignment="Left" 
                 Grid.Row="1" 
-                VerticalAlignment="Top"
-                Cursor="Hand" BorderBrush="#FFC3C3C3" Background="White" Click="NavigateBackButton_Click"/>
+                VerticalAlignment="Bottom"
+                Cursor="Hand" 
+                BorderBrush="#FFC3C3C3" 
+                Click="NavigateBackButton_Click">
+            <Button.Foreground>
+                <ImageBrush Stretch="None"/>
+            </Button.Foreground>
+            <Button.Background>
+                <ImageBrush ImageSource="/HotelManagement;component/Resources/Img/if_icon-ios7-arrow-back_211686.png" Stretch="Uniform">
+                    <ImageBrush.RelativeTransform>
+                        <TransformGroup>
+                            <ScaleTransform CenterY="0.5" CenterX="0.5"/>
+                            <SkewTransform CenterY="0.5" CenterX="0.5"/>
+                            <RotateTransform CenterY="0.5" CenterX="0.5"/>
+                            <TranslateTransform/>
+                        </TransformGroup>
+                    </ImageBrush.RelativeTransform>
+                </ImageBrush>
+            </Button.Background>
+        </Button>
 
         <Button x:Name="NavigateNextButton" 
-                Content ="Next"
+                Content =""
                 HorizontalAlignment="Left" 
                 Margin="49,0,0,0" 
                 Grid.Row="1"
-                VerticalAlignment="Top" 
+                VerticalAlignment="Bottom" 
                 Width="50"
-                Height="28" 
+                Height="29" 
                 BorderBrush="#FFC3C3C3" 
-                Background="White" Click="NavigateNextButton_Click"/>
+                Click="NavigateNextButton_Click" 
+                Cursor="Hand">
+            <Button.Background>
+                <ImageBrush ImageSource="/HotelManagement;component/Resources/Img/if_icon-ios7-arrow-forward_211688.png" Stretch="Uniform">
+                    <ImageBrush.RelativeTransform>
+                        <TransformGroup>
+                            <ScaleTransform CenterY="0.5" CenterX="0.5"/>
+                            <SkewTransform CenterY="0.5" CenterX="0.5"/>
+                            <RotateTransform CenterY="0.5" CenterX="0.5"/>
+                            <TranslateTransform/>
+                        </TransformGroup>
+                    </ImageBrush.RelativeTransform>
+                </ImageBrush>
+            </Button.Background>
+        </Button>
 
         <SubContent:RoomCatalogControl
                         x:Name="addingNewGuestSubContent"

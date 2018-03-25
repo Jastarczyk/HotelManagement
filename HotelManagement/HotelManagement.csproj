@@ -195,5 +195,11 @@
   <ItemGroup>
     <Folder Include="DataSets\" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Img\Rooms\Room2\pexels-photo-210265.jpeg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Img\Rooms\Room3\pexels-photo-271616.jpeg" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

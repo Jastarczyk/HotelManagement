@@ -13,16 +13,16 @@
 
             <Rectangle x:Name="TitleRactangle" 
                        DockPanel.Dock="Top" 
-                       Fill="#FF62BB6A"
+                       Fill="#FF6CCAFF"
                        Height="70" 
                        VerticalAlignment="Top"
                        Width="800" MouseLeftButtonDown="Rectangle_MouseLeftButtonDown" />
 
             <StackPanel DockPanel.Dock="Left" 
                         HorizontalAlignment="Left" 
-                        Width="180" 
-                        Height="auto"
-                        Margin="0,0,0,10">
+                        Width="180"
+                        VerticalAlignment="Stretch"
+                        Margin="0,0,0,20">
 
                 <Button x:Name="DashboardButton"
                         Content="Dashboard" 
@@ -48,10 +48,16 @@
                         BorderThickness="0" 
                         Width="auto" Click="AdministrationButton_Click" LostFocus="AdministrationButton_LostFocus"/>
 
+                <Button x:Name="LogOutButton" 
+                        Content="Logout" 
+                        Height="60" 
+                        BorderThickness="0"
+                        Width="auto" Click="LogOutButton_Click" LostFocus="LogOutButton_LostFocus"/>
+
                 <Button x:Name="ExitButton" 
                         Content="Exit" 
                         Height="60" 
-                        BorderThickness="0" 
+                        BorderThickness="0"
                         Width="auto" Click="ExitButton_Click" LostFocus="ExitButton_LostFocus"/>
 
             </StackPanel>
@@ -60,8 +66,7 @@
                    x:Name="InnerFrame" 
                    HorizontalAlignment="Stretch"
                    VerticalAlignment="Stretch"
-                   Margin="0,0,0,10"/>
-
+                   Margin="0,0,0,0"/>
         </DockPanel>
     </Grid>
 </Window>

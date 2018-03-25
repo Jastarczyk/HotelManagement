@@ -3,6 +3,7 @@ using HotelManagmentLogic.Entity.DatabaseConfig;
 using HotelManagmentLogic.Logger;
 using HotelManagmentLogic.LoginScreenLogic;
 using HotelManagmentLogic.LoginScreenLogic.UserAccessActionResults;
+using HotelManagmentLogic.Models.Administration;
 using System.Windows;
 
 namespace HotelManagement.UserAccessUI
@@ -12,19 +13,19 @@ namespace HotelManagement.UserAccessUI
         WindowsManagement windowsManagement;
         UserLogin userLogin;
 
+        //starting point of whole program
         public LoginWindow()
         {
             InitializeComponent();
+            //set starting windows
             windowsManagement = new WindowsManagement(this);
 
-            //TODO uncomment this
-
-            //if (!DatabaseInfo.CheckDataBaseConnection())
-            //{
-            //    MessageBox.Show(HotelManagmentLogic.Configuration.OutputMessages.DataBaseConnectionError, DatabaseInfo.GetDataBaseName());
-            //    Application.Current.Shutdown();
-            //}
-
+            //check connection to database 
+            if (!DatabaseInfo.CheckDataBaseConnection())
+            {
+                MessageBox.Show(HotelManagmentLogic.Configuration.OutputMessages.DataBaseConnectionError, DatabaseInfo.GetDataBaseName());
+                Application.Current.Shutdown();
+            }
         }
 
         private void LoginButton_Click(object sender, RoutedEventArgs e)
@@ -42,13 +43,14 @@ namespace HotelManagement.UserAccessUI
 
         private void ForceLogin_Click(object sender, RoutedEventArgs e)
         {
-            PrecedeToMainWindow();
+            PrecedeToMainWindow(new User() { Name = "TestingUser" });
         }
 
-        private void PrecedeToMainWindow()
+        private void PrecedeToMainWindow(User loggedUser)
         {
             WindowsManagement.loginWindow.Close();
-            WindowsManagement.mainWindow.Show();
+            WindowsManagement.CreateMainWindow(loggedUser);
+            WindowsManagement.ShowMainWindow();
         }
 
         private void Window_KeyUp(object sender, System.Windows.Input.KeyEventArgs e)
@@ -68,7 +70,7 @@ namespace HotelManagement.UserAccessUI
 
             if (loginResult.OperationSuccess)
             {
-                PrecedeToMainWindow();
+                PrecedeToMainWindow(loginResult.AccessingUser);
             }
         }
     }

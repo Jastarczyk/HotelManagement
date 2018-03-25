@@ -1,4 +1,5 @@
 ﻿using HotelManagement.UserAccessUI;
+using HotelManagmentLogic.Models.Administration;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,7 +11,7 @@ namespace HotelManagement
 {
     class WindowsManagement
     {
-        public static MainWindow mainWindow;
+        private static MainWindow mainWindow;
         public static LoginWindow loginWindow;
         public static RegistrationWindow registrationWindow;
 
@@ -18,7 +19,6 @@ namespace HotelManagement
         {
             try
             {
-                mainWindow = new MainWindow();
                 registrationWindow = new RegistrationWindow();
                 loginWindow = (LoginWindow)startingWindow;
             }
@@ -26,6 +26,24 @@ namespace HotelManagement
             {
                 MessageBox.Show(ex.Message);
             }
+        }
+
+        public static void CreateMainWindow(User loggedUser)
+        {
+            mainWindow = new MainWindow(loggedUser);
+        }
+
+        public static void ShowMainWindow()
+        {
+            if (mainWindow != null && mainWindow.IsActive != true)
+            {
+                mainWindow.Show();
+            }
+        }
+
+        public static MainWindow GetMainWindowInstance()
+        {
+            return mainWindow;
         }
     }
 }

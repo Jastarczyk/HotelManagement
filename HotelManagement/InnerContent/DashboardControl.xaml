@@ -5,43 +5,150 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:HotelManagement.InnerContent"
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="620" Background="White">
-    <Grid>
+             d:DesignHeight="300" d:DesignWidth="620" Background="White" Loaded="UserControl_Loaded" Unloaded="UserControl_Unloaded">
+    <Grid Margin="0">
         <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" ></ColumnDefinition>
             <ColumnDefinition Width="*"></ColumnDefinition>
             <ColumnDefinition Width="*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
 
         <Grid.RowDefinitions>
             <RowDefinition Height="40"></RowDefinition>
+            <RowDefinition Height="40"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
-            <RowDefinition Height="75"></RowDefinition>
+            <RowDefinition Height="40"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
         </Grid.RowDefinitions>
 
-        <Label x:Name="HostingGuestsLabel" 
-               Content="Hosting Guests"
-               HorizontalAlignment="Left" 
-               Margin="10,10,0,0"
-               VerticalAlignment="Top"
-               FontWeight="DemiBold"/>
+        <Rectangle x:Name="RightRect" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.ColumnSpan="3" Fill="#4D6AE4FF"/>
 
-        <Label x:Name="CalendarLabel"
-               Content="Calendar"
-               FontWeight="SemiBold"
-               HorizontalAlignment="Left" 
+        <Label Grid.Column="0"
                Grid.Row="0"
-               Grid.Column="1"
-               Margin="10,10,0,0"
+               Content="Logged as:"
+               FontSize="22"
+               HorizontalAlignment="Left" 
+               VerticalAlignment="Center"
                />
 
-        <Rectangle Fill="DarkGray" 
-                   HorizontalAlignment="Center" 
-                   Height="1" 
-                   Margin="0,0,0,0" 
-                   Stroke="DarkGray" 
-                   VerticalAlignment="Bottom" 
-                   Width="620" 
-                   Grid.ColumnSpan="2" 
-                   Grid.Row="0"/>
+        <TextBox x:Name="UsernameTextBoxWelcome"
+                 Grid.Column="0"
+                 Grid.ColumnSpan="2"
+                 Width="285"
+                 FontWeight="DemiBold"
+                 TextAlignment="Left"
+                 HorizontalAlignment="Left" 
+                 VerticalAlignment="Center"
+                 Margin="115,4,0,4" 
+                 TextWrapping="Wrap" 
+                 Text="User" 
+                 FontSize="22" BorderBrush="{x:Null}" Foreground="Black" IsHitTestVisible="False" Focusable="False" Background="{x:Null}" 
+                 />
+
+        <Rectangle HorizontalAlignment="Stretch" Grid.Row="1" VerticalAlignment="Stretch" Grid.ColumnSpan="3">
+            <Rectangle.Fill>
+                <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.InactiveBorderColorKey}}"/>
+            </Rectangle.Fill>
+        </Rectangle>
+
+        <Rectangle HorizontalAlignment="Stretch" Grid.Row="3" VerticalAlignment="Stretch" Grid.ColumnSpan="3">
+            <Rectangle.Fill>
+                <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.InactiveBorderColorKey}}"/>
+            </Rectangle.Fill>
+        </Rectangle>
+
+
+        <Label x:Name="HostingGuestsLabel" 
+               Grid.Row="1"
+               Content="Hosting Guests"
+               HorizontalAlignment="Left" 
+               Margin="10,5,0,0"
+               VerticalAlignment="Top"
+               FontWeight="DemiBold" FontSize="14"/>
+
+        <Label x:Name="LastGuestRegistrationLabel" 
+               Grid.Row="3"
+               Content="Last Registered Guest"
+               HorizontalAlignment="Left" 
+               Margin="10,5,0,0"
+               VerticalAlignment="Top"
+               FontWeight="DemiBold" FontSize="14"/>
+
+
+        <Grid Height="50" Margin="10,10,0,0" Grid.Row="2" VerticalAlignment="Top" HorizontalAlignment="Left">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width ="*"></ColumnDefinition>
+                <ColumnDefinition Width ="*"></ColumnDefinition>
+                <ColumnDefinition Width ="*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+
+            <TextBox x:Name="currentGuestAmount" 
+                     Grid.Column="0"
+                     TextAlignment="Center"
+                     HorizontalAlignment="Stretch" 
+                     Text="1" 
+                     VerticalAlignment="Center"
+                     TextWrapping="Wrap"
+                     FontSize="36" 
+                     Background="{x:Null}" BorderBrush="{x:Null}" SelectionBrush="{x:Null}" 
+                     Focusable="False" IsReadOnly="True" FontFamily="Segoe UI Semibold" IsHitTestVisible="False"/>
+
+            <TextBox Grid.Column="1"
+                     TextAlignment="Center"
+                     HorizontalAlignment="Stretch" 
+                     Text="/" 
+                     VerticalAlignment="Center"
+                     TextWrapping="Wrap"
+                     FontSize="36" 
+                     Background="{x:Null}" BorderBrush="{x:Null}" SelectionBrush="{x:Null}" 
+                     Focusable="False" IsReadOnly="True" FontFamily="Segoe UI Semibold" IsHitTestVisible="False"/>
+
+            <TextBox x:Name="maxGuestNumber"  
+                     Grid.Column="2"
+                     TextAlignment="Center"
+                     HorizontalAlignment="Stretch" 
+                     Text="10" 
+                     VerticalAlignment="Center"
+                     TextWrapping="Wrap"
+                     FontSize="36" 
+                     Background="{x:Null}" BorderBrush="{x:Null}" SelectionBrush="{x:Null}" 
+                     Focusable="False" IsReadOnly="True" FontFamily="Segoe UI Semibold" IsHitTestVisible="False"/>
+
+        </Grid>
+
+
+        <TextBox x:Name="ClockTextBox"
+                 Grid.Column="2" 
+                 FontWeight="SemiBold"
+                 HorizontalAlignment="Stretch" 
+                 Margin="0,0,0,0" 
+                 TextWrapping="Wrap"
+                 Text="00:00:00"
+                 FontSize="22"
+                 TextAlignment="Center"
+                 VerticalAlignment="Center" Background="{x:Null}" BorderBrush="{x:Null}" Focusable="False" IsHitTestVisible="False"/>
+
+        <ProgressBar x:Name="guestProgressBar"
+                     HorizontalAlignment="Stretch" 
+                     Height="10"
+                     Margin="5" 
+                     Grid.Row="2" 
+                     VerticalAlignment="Top" BorderBrush="#FF7C7C7C" Background="#FF6CCAFF" Foreground="#FF0B40B2" Maximum="10"/>
+
+        <TextBox x:Name="lastRegisteredGuestTextBox"
+                 HorizontalAlignment="Stretch" 
+                 Grid.Row="4" 
+                 TextWrapping="Wrap" 
+                 Text="" 
+                 VerticalAlignment="Stretch"
+                 FontSize="20" BorderBrush="{x:Null}" Focusable="False" IsHitTestVisible="False"/>
+
+        <Label x:Name="freeRoomsLabel" 
+            Grid.Row="1"
+            Content="Free rooms"
+            HorizontalAlignment="Left" 
+            Margin="10,5,0,0"
+            VerticalAlignment="Top"
+            FontWeight="DemiBold" FontSize="14" Grid.Column="1"/>
     </Grid>
 </UserControl>

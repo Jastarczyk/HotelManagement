@@ -1,4 +1,5 @@
 ﻿using HotelManagmentLogic.Entity.DatabaseConfig;
+using HotelManagmentLogic.Models;
 using HotelManagmentLogic.Models.Acommodation;
 using System;
 using System.Collections.Generic;
@@ -8,7 +9,23 @@ namespace HotelManagmentLogic.DatabaseAccess
 {
    public static class RoomDbTableOperations
     {
-        public static List<Room> GetAllRoomsFromDB()
+        //TODO replace those methods with generic type 
+        public static List<Guest> GetAllGuestList()
+        {
+            try
+            {
+                using (HotelContext hotelContext = new HotelContext())
+                {
+                    return hotelContext.Guests.Select(x => x).ToList();
+                }
+            }
+            catch (Exception)
+            {
+                return new List<Guest>();
+            }
+        }
+
+        public static List<Room> GetAllRoomsList()
         {
             try
             {
@@ -23,7 +40,7 @@ namespace HotelManagmentLogic.DatabaseAccess
             }
         }
 
-        public static List<int> GetAllRoomsNumbersFromDB()
+        public static List<int> GetNumbersFromAvaiableRooms()
         {
             try
             {

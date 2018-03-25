@@ -12,7 +12,7 @@
     </UserControl.Resources>
 
 
-    <TabControl HorizontalAlignment="Left" Height="350" VerticalAlignment="Top" Width="600" BorderThickness="0" Margin="0,-10,0,0">
+    <TabControl HorizontalAlignment="Left" Height="350" VerticalAlignment="Top" Width="600" BorderThickness="0" Margin="0,0,0,0">
         <TabControl.Background>
             <RadialGradientBrush>
                 <GradientStop Color="#FFE6E6E6" Offset="1"/>

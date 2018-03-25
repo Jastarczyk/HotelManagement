@@ -32,15 +32,13 @@
                VerticalAlignment="Stretch"
                Margin="10"
                Grid.Column="1"
-               Grid.RowSpan="6"
-               Source="/HotelManagement;component/Resources/Img/Rooms/Room1/1.jpeg"/>
-        <!-- TODO : insertbinding-->
+               Grid.RowSpan="6"/>
 
         <Label Content="Room number" 
                HorizontalAlignment="Left"
-               Margin="5,0,0,0" 
+               Margin="5,0,0,20" 
                Grid.Row="1"
-               VerticalAlignment="Top" 
+               VerticalAlignment="Bottom" 
                Height="25"/>
 
         <TextBox x:Name="numberTextBox"
@@ -50,13 +48,13 @@
                  Margin="10,10,10,0"
                  TextWrapping="Wrap" 
                  Text=""
-                 VerticalAlignment="Bottom"/>
+                 VerticalAlignment="Bottom" IsReadOnly="True"/>
 
         <Label Content="Special name" 
                HorizontalAlignment="Left"
-               Margin="5,0,0,0" 
+               Margin="5,0,0,20" 
                Grid.Row="2"
-               VerticalAlignment="Top" 
+               VerticalAlignment="Bottom" 
                Height="25"/>
 
         <TextBox x:Name="specialNameTextBox"
@@ -66,13 +64,13 @@
                  Margin="10,10,10,0"
                  TextWrapping="Wrap" 
                  Text=""
-                 VerticalAlignment="Bottom"/>
+                 VerticalAlignment="Bottom" IsReadOnly="True"/>
 
         <Label Content="Area" 
                HorizontalAlignment="Left"
-               Margin="5,0,0,0" 
+               Margin="5,0,0,20" 
                Grid.Row="3"
-               VerticalAlignment="Top" 
+               VerticalAlignment="Bottom" 
                Height="25"/>
 
         <TextBox x:Name="areaTextBox"
@@ -82,13 +80,13 @@
                  Margin="10,10,10,0"
                  TextWrapping="Wrap" 
                  Text=""
-                 VerticalAlignment="Bottom"/>
+                 VerticalAlignment="Bottom" IsReadOnly="True"/>
 
         <Label Content="Beds Amount" 
                HorizontalAlignment="Left"
-               Margin="5,0,0,0" 
+               Margin="5,0,0,20" 
                Grid.Row="4"
-               VerticalAlignment="Top" 
+               VerticalAlignment="Bottom" 
                Height="25"/>
 
         <TextBox x:Name="bedAmountTextBox"
@@ -98,7 +96,7 @@
                  Margin="10,10,10,0"
                  TextWrapping="Wrap" 
                  Text=""
-                 VerticalAlignment="Bottom"/>
+                 VerticalAlignment="Bottom" IsReadOnly="True"/>
 
         <Label Content="Additional information" 
                HorizontalAlignment="Left"
@@ -112,14 +110,18 @@
                   HorizontalAlignment="Left" 
                   Margin="10,30,0,0"
                   Grid.Row="5" 
-                  VerticalAlignment="Top"/>
+                  VerticalAlignment="Top" 
+                  IsHitTestVisible="False" 
+                  Focusable="False"/>
 
         <CheckBox x:Name="hasBalconyCheckBox" 
                   Content="Balcony"
                   HorizontalAlignment="Left" 
                   Margin="97,30,0,0"
                   Grid.Row="5" 
-                  VerticalAlignment="Top"/>
+                  VerticalAlignment="Top" 
+                  Focusable="False"
+                  IsHitTestVisible="False"/>
 
     </Grid>
 </UserControl>

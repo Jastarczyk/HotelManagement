@@ -1,5 +1,7 @@
 ﻿using HotelManagement.InnerContent;
+using HotelManagement.UserAccessUI;
 using HotelManagmentLogic.Entity;
+using HotelManagmentLogic.Models.Administration;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,14 +19,22 @@ using System.Windows.Shapes;
 
 namespace HotelManagement
 {
-    public partial class MainWindow : Window
+    public partial class MainWindow : Window, IDisposable
     {
-        private Brush activeButtonColor = Brushes.MediumAquamarine;
+        private static User currentUser;
+
+        private Brush activeButtonColor = Brushes.AliceBlue;
         private Brush defaultButtonColor = Brushes.LightGray;
 
-        public MainWindow()
+        public MainWindow(User user)
         {
             InitializeComponent();
+            currentUser = user;
+        }
+
+        public User GetCurrentUser()
+        {
+            return currentUser;
         }
 
         private void OnWindowLoad(object sender, RoutedEventArgs e)
@@ -89,6 +99,13 @@ namespace HotelManagement
             }
         }
 
+        private void LogOutButton_Click(object sender, RoutedEventArgs e)
+        {
+            Dispose();
+            LoginWindow loginWindow = new LoginWindow();
+            WindowsManagement.loginWindow.Show();
+        }
+
         private void Rectangle_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             this.DragMove();
@@ -121,6 +138,16 @@ namespace HotelManagement
             ExitButton.Background = defaultButtonColor;
         }
 
+        private void LogOutButton_LostFocus(object sender, RoutedEventArgs e)
+        {
+            LogOutButton.Background = defaultButtonColor;
+        }
+
+        public void Dispose()
+        {
+            this.Close();
+            GC.Collect();
+        }
         #endregion
     }
 }

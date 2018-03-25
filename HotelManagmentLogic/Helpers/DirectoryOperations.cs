@@ -44,4 +44,5 @@ namespace HotelManagmentLogic.Helpers
             return images;
         }   
     }
+
 }

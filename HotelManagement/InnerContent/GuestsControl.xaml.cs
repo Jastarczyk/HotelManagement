@@ -31,9 +31,12 @@ namespace HotelManagement.InnerContent
             LoadCurrentControlContent();
         }
 
+        /// <summary>
+        /// Method using for fill out default window's content information 
+        /// </summary>
         private void LoadCurrentControlContent()
         {
-            roomsNumberList = RoomDbTableOperations.GetAllRoomsNumbersFromDB();
+            roomsNumberList = RoomDbTableOperations.GetNumbersFromAvaiableRooms();
             this.roomChooseComboBox.ItemsSource = ConvertEachListElementToString(roomsNumberList);
             this.BookingMethodsCombobox.ItemsSource = Enum.GetValues(typeof(BookingMethods));
 
@@ -49,10 +52,11 @@ namespace HotelManagement.InnerContent
 
             if (formatPredicate)
             {
+                //Creating objects to fill with data from user input (and then add them to db)
                 Room choosedRoom = new Room();
                 Booking bookingInfo = new Booking();
                 AddToDatabaseResult bookingInfoResults;
-                List<Room> roomsfullList = RoomDbTableOperations.GetAllRoomsFromDB();
+                List<Room> roomsfullList = RoomDbTableOperations.GetAllRoomsList();
 
                 try
                 {
