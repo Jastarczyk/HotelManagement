@@ -65,6 +65,7 @@ namespace HotelManagement.InnerContent
         {
            Dispatcher.Invoke(() =>
            {
+               this.CalendarTextbox.Text = DateTime.Now.ToShortDateString();
                this.ClockTextBox.Text = DateTime.Now.ToLongTimeString();
            });
         }
