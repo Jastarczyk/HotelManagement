@@ -1,4 +1,5 @@
-﻿using HotelManagmentLogic.Models;
+﻿using HotelManagmentLogic.Helpers;
+using HotelManagmentLogic.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -36,18 +37,28 @@ namespace HotelManagement.InnerContent
 
         private void FillStartingDashboardContent()
         {
-            //get booked guest data from db
-            List<Guest> currentGuests = HotelManagmentLogic.DatabaseAccess.RoomDbTableOperations.GetAllGuestList();
-            Guest lastBookedGuest = currentGuests.Where(x => x.ID >= currentGuests.Max(n => n.ID)).FirstOrDefault();
+            //get info from data base to use it later
+            List<Guest> currentGuests = HotelManagmentLogic.Entity.CommonOperations.DatabaseOperations
+                                                           .GetFullTableBaseOnType<Guest>()
+                                                           .ReturnedData
+                                                           .ConvertToGenericList<Guest>();
 
-            //title - logging user
+            List<Booking> bookingTable = HotelManagmentLogic.Entity.CommonOperations.DatabaseOperations
+                                                            .GetFullTableBaseOnType<Booking>()
+                                                            .ReturnedData
+                                                            .ConvertToGenericList<Booking>();
+
+            //fill box about last booked guest and store that variable
+            Guest lastBookedGuest = FillLastBookedGuestOutput(currentGuests);
+
+            //fill box which represent logged user name
             UsernameTextBoxWelcome.Text = WindowsManagement.GetMainWindowInstance().GetCurrentUser().Name;
 
             //booked guest amount - fill x/x format and also progress bar
-            currentGuestAmount.Text = currentGuests.Count.ToString();
-            guestProgressBar.Value = Int32.Parse(currentGuestAmount.Text);
+            FillGuestCurrentGuestCountOutput(currentGuests);
 
-            lastRegisteredGuestTextBox.Text = string.Format("{0}\r\n{1}", lastBookedGuest.Name?? string.Empty, lastBookedGuest.Surname?? string.Empty);
+            //inner join booking and guests table to get data about closest booking end date
+            FillClosestBookEndingOutput(bookingTable, currentGuests, lastBookedGuest);
         }
 
         #region Clock functionality
@@ -63,18 +74,50 @@ namespace HotelManagement.InnerContent
 
         private void UpdateClock()
         {
-           Dispatcher.Invoke(() =>
-           {
-               this.CalendarTextbox.Text = DateTime.Now.ToShortDateString();
-               this.ClockTextBox.Text = DateTime.Now.ToLongTimeString();
-           });
+            try
+            {
+                Dispatcher.Invoke(() =>
+                {
+                    this.CalendarTextbox.Text = DateTime.Now.ToShortDateString();
+                    this.ClockTextBox.Text = DateTime.Now.ToLongTimeString();
+                });
+            }
+            catch (Exception)
+            {
+                //silented
+            }
         }
 
         #endregion
 
-        private void UserControl_Unloaded(object sender, RoutedEventArgs e)
+        #region UserOutputFillers
+
+        private void FillClosestBookEndingOutput(List<Booking> bookingTable, List<Guest> currentGuests, Guest lastBookedGuest)
         {
-           //TODO end this (throw and exeption when on program close (Async task)
+            var innerJoinResult = bookingTable.Join(currentGuests, booking => booking.ID, guest => guest.BookingID,
+              (booking, guest) =>
+              {
+                  return new Tuple<DateTime, string>(booking.ReservedTo, guest.Name + " \r\n" + guest.Surname);
+              }).OrderBy(x => x.Item1);
+
+            lastRegisteredGuestTextBox.Text = string.Format("{0}\r\n{1}", lastBookedGuest.Name ?? string.Empty, lastBookedGuest.Surname ?? string.Empty);
+            ClosestBookEndTextBox.Text = innerJoinResult.FirstOrDefault().Item1.ToShortDateString() + " \r\n" + innerJoinResult.FirstOrDefault().Item2;
         }
+
+        private void FillGuestCurrentGuestCountOutput(List<Guest> currentGuests)
+        {
+            currentGuestAmount.Text = currentGuests.Count.ToString();
+            guestProgressBar.Value = Int32.Parse(currentGuestAmount.Text);
+        }
+
+        private Guest FillLastBookedGuestOutput(List<Guest> currentGuests)
+        {
+            Guest lastBookedGuest = currentGuests.Where(x => x.ID >= currentGuests.Max(n => n.ID)).FirstOrDefault();
+            maxGuestNumber.Text = ((int)guestProgressBar.Maximum).ToString();
+
+            return lastBookedGuest;
+        }
+
+        #endregion
     }
 }

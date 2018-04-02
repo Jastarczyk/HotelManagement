@@ -5,6 +5,7 @@ using HotelManagmentLogic.Entity.CommonOperations;
 using HotelManagmentLogic.Entity.DatabaseConfig;
 using HotelManagmentLogic.Enums;
 using HotelManagmentLogic.GuestsControlLogic;
+using HotelManagmentLogic.Helpers;
 using HotelManagmentLogic.Logger;
 using HotelManagmentLogic.Models;
 using HotelManagmentLogic.Models.Acommodation;
@@ -36,7 +37,7 @@ namespace HotelManagement.InnerContent
         /// </summary>
         private void LoadCurrentControlContent()
         {
-            roomsNumberList = RoomDbTableOperations.GetNumbersFromAvaiableRooms();
+            roomsNumberList = DatabaseOperations.GetFullTableBaseOnType<Room>().ReturnedData.ConvertToGenericList<Room>().Select(x => x.RoomNumber).ToList();
             this.roomChooseComboBox.ItemsSource = ConvertEachListElementToString(roomsNumberList);
             this.BookingMethodsCombobox.ItemsSource = Enum.GetValues(typeof(BookingMethods));
 
@@ -56,7 +57,7 @@ namespace HotelManagement.InnerContent
                 Room choosedRoom = new Room();
                 Booking bookingInfo = new Booking();
                 AddToDatabaseResult bookingInfoResults;
-                List<Room> roomsfullList = RoomDbTableOperations.GetAllRoomsList();
+                List<Room> roomsfullList = DatabaseOperations.GetFullTableBaseOnType<Room>().ReturnedData.ConvertToGenericList<Room>();
 
                 try
                 {

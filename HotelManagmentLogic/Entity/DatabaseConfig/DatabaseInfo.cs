@@ -18,8 +18,9 @@ namespace HotelManagmentLogic.Entity.DatabaseConfig
                     return hotelContext.Database.Exists();
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                Logger.ErrorLogger.AddLog(new Logger.ErrorLogger.Error(ex));
                 return false;
             }
         }

@@ -1,9 +1,11 @@
 ﻿using HotelManagmentLogic.Entity.DatabaseConfig;
 using HotelManagmentLogic.Entity.OperationResults;
 using HotelManagmentLogic.GuestsControlLogic;
+using HotelManagmentLogic.Models;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Linq;
 
 namespace HotelManagmentLogic.Entity.CommonOperations
 {
@@ -26,6 +28,29 @@ namespace HotelManagmentLogic.Entity.CommonOperations
 
             return new DatabaseOperations().BuildOperationResult(true, Configuration.OutputMessages.DataBaseInsertSuccess);
         }
+
+        #region test-region
+
+        public static IEnumerable<List<string>> InnerJoin<T>(List<Guest> guestTable) where T: Booking
+        {
+            using (HotelContext hotelContext = new HotelContext())
+            {
+                hotelContext.Set<T>().Load();
+
+                return hotelContext.Set<T>().Local.Join(guestTable, booking => booking.ID, guest => guest.BookingID, 
+                    (booking, guest) => 
+                    {
+                        return new List<string>()
+                        {
+                            booking.ReservedTo.ToLongDateString(),
+                            guest.Name,
+                            guest.Surname
+                        };
+                    });
+            }
+        }
+
+        #endregion
 
         public static ReadDatabaseResult GetFullTableBaseOnType<T>() where T : class
         {
