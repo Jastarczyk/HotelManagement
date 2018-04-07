@@ -31,6 +31,7 @@ namespace HotelManagmentLogic.Entity.CommonOperations
 
         #region test-region
 
+
         public static IEnumerable<List<string>> InnerJoin<T>(List<Guest> guestTable) where T: Booking
         {
             using (HotelContext hotelContext = new HotelContext())

@@ -46,7 +46,6 @@ namespace HotelManagement.InnerContent
                                                : string.Empty;
         }
 
-        //TODO move this logic to other project!
         private void AddButton_Click(object sender, RoutedEventArgs e)
         {
             bool formatPredicate = CheckIfAllInputsFilled();

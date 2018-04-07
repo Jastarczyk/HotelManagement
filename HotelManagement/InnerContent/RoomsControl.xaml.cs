@@ -53,7 +53,6 @@ namespace HotelManagement.InnerContent
         {
             if (room != null)
             {
-                //TODO rework this to binding source
                 addingNewGuestSubContent.numberTextBox.Text = room.RoomNumber.ToString();
                 addingNewGuestSubContent.specialNameTextBox.Text = room.SpecialName;
                 addingNewGuestSubContent.areaTextBox.Text = room.Area.ToString();

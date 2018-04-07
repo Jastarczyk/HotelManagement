@@ -3,18 +3,10 @@ using HotelManagmentLogic.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace HotelManagement.InnerContent
 {
@@ -61,6 +53,51 @@ namespace HotelManagement.InnerContent
             FillClosestBookEndingOutput(bookingTable, currentGuests, lastBookedGuest);
         }
 
+        #region UserOutputFillers
+
+        private void FillClosestBookEndingOutput(List<Booking> bookingTable, List<Guest> currentGuests, Guest lastBookedGuest)
+        {
+            var innerJoinResult = bookingTable.Join(currentGuests, booking => booking.ID, guest => guest.BookingID,
+              (booking, guest) =>
+              {
+                  return new Tuple<DateTime, List<string>>(booking.ReservedTo, new List<string>()
+                  {
+                      guest.Name,
+                      guest.Surname
+                  }); 
+              }).OrderBy(x => x.Item1);
+
+            lastRegisteredGuestTextBox.Text = string.Format("{0}\r\n{1}", lastBookedGuest.Name ?? string.Empty, lastBookedGuest.Surname ?? string.Empty);
+
+            try
+            {
+                ClosestBookEndTextBox.Text = innerJoinResult.FirstOrDefault()
+                                                            .Item1
+                                                            .ToShortDateString() + " \r\n" + innerJoinResult.FirstOrDefault().Item2[0]
+                                                                                 + "\r\n" + innerJoinResult.FirstOrDefault().Item2[1];
+            }
+            catch (Exception)
+            {
+                ClosestBookEndTextBox.Text = string.Empty;
+            }
+        }
+
+        private void FillGuestCurrentGuestCountOutput(List<Guest> currentGuests)
+        {
+            currentGuestAmount.Text = currentGuests.Count.ToString();
+            guestProgressBar.Value = Int32.Parse(currentGuestAmount.Text);
+        }
+
+        private Guest FillLastBookedGuestOutput(List<Guest> currentGuests)
+        {
+            Guest lastBookedGuest = currentGuests.Where(x => x.ID >= currentGuests.Max(n => n.ID)).FirstOrDefault();
+            maxGuestNumber.Text = ((int)guestProgressBar.Maximum).ToString();
+
+            return lastBookedGuest;
+        }
+
+        #endregion
+
         #region Clock functionality
 
         private void StartClock()
@@ -86,36 +123,6 @@ namespace HotelManagement.InnerContent
             {
                 //silented
             }
-        }
-
-        #endregion
-
-        #region UserOutputFillers
-
-        private void FillClosestBookEndingOutput(List<Booking> bookingTable, List<Guest> currentGuests, Guest lastBookedGuest)
-        {
-            var innerJoinResult = bookingTable.Join(currentGuests, booking => booking.ID, guest => guest.BookingID,
-              (booking, guest) =>
-              {
-                  return new Tuple<DateTime, string>(booking.ReservedTo, guest.Name + " \r\n" + guest.Surname);
-              }).OrderBy(x => x.Item1);
-
-            lastRegisteredGuestTextBox.Text = string.Format("{0}\r\n{1}", lastBookedGuest.Name ?? string.Empty, lastBookedGuest.Surname ?? string.Empty);
-            ClosestBookEndTextBox.Text = innerJoinResult.FirstOrDefault().Item1.ToShortDateString() + " \r\n" + innerJoinResult.FirstOrDefault().Item2;
-        }
-
-        private void FillGuestCurrentGuestCountOutput(List<Guest> currentGuests)
-        {
-            currentGuestAmount.Text = currentGuests.Count.ToString();
-            guestProgressBar.Value = Int32.Parse(currentGuestAmount.Text);
-        }
-
-        private Guest FillLastBookedGuestOutput(List<Guest> currentGuests)
-        {
-            Guest lastBookedGuest = currentGuests.Where(x => x.ID >= currentGuests.Max(n => n.ID)).FirstOrDefault();
-            maxGuestNumber.Text = ((int)guestProgressBar.Maximum).ToString();
-
-            return lastBookedGuest;
         }
 
         #endregion
