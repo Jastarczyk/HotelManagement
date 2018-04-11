@@ -1,7 +1,7 @@
 ﻿using HotelManagmentLogic.Entity.DatabaseConfig;
 using HotelManagmentLogic.Entity.OperationResults;
 using HotelManagmentLogic.GuestsControlLogic;
-using HotelManagmentLogic.Models;
+using HotelManagmentLogic.Models.Administration;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;

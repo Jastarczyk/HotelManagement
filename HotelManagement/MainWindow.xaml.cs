@@ -1,4 +1,5 @@
 ﻿using HotelManagement.InnerContent;
+using HotelManagement.Management;
 using HotelManagement.UserAccessUI;
 using HotelManagmentLogic.Entity;
 using HotelManagmentLogic.Models.Administration;
@@ -21,20 +22,12 @@ namespace HotelManagement
 {
     public partial class MainWindow : Window, IDisposable
     {
-        private static User currentUser;
-
         private Brush activeButtonColor = Brushes.AliceBlue;
         private Brush defaultButtonColor = Brushes.LightGray;
 
-        public MainWindow(User user)
+        public MainWindow()
         {
             InitializeComponent();
-            currentUser = user;
-        }
-
-        public User GetCurrentUser()
-        {
-            return currentUser;
         }
 
         private void OnWindowLoad(object sender, RoutedEventArgs e)

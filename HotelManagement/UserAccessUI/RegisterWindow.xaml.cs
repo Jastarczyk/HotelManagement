@@ -1,4 +1,5 @@
-﻿using HotelManagmentLogic.LoginScreenLogic;
+﻿using HotelManagement.Management;
+using HotelManagmentLogic.LoginScreenLogic;
 using HotelManagmentLogic.LoginScreenLogic.UserAccessActionResults;
 using System;
 using System.Windows;

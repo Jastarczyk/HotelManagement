@@ -4,7 +4,7 @@ using System;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
 
-namespace HotelManagmentLogic.Models
+namespace HotelManagmentLogic.Models.Administration
 {
     [Table("Booking")]
     public class Booking

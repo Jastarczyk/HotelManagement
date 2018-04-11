@@ -1,4 +1,5 @@
-﻿using HotelManagmentLogic.DatabaseAccess;
+﻿using HotelManagement.Management;
+using HotelManagmentLogic.DatabaseAccess;
 using HotelManagmentLogic.Entity.DatabaseConfig;
 using HotelManagmentLogic.Logger;
 using HotelManagmentLogic.LoginScreenLogic;
@@ -10,22 +11,11 @@ namespace HotelManagement.UserAccessUI
 {
     public partial class LoginWindow : Window
     {
-        WindowsManagement windowsManagement;
-        UserLogin userLogin;
-
         //starting point of whole program
         public LoginWindow()
         {
             InitializeComponent();
-            //set starting windows
-            windowsManagement = new WindowsManagement(this);
-
-            //check connection to database 
-            if (!DatabaseInfo.CheckDataBaseConnection())
-            {
-                MessageBox.Show(HotelManagmentLogic.Configuration.OutputMessages.DataBaseConnectionError, DatabaseInfo.GetDataBaseName());
-                Application.Current.Shutdown();
-            }
+            ProgramManagement.Initialize(this);
         }
 
         private void LoginButton_Click(object sender, RoutedEventArgs e)
@@ -43,13 +33,15 @@ namespace HotelManagement.UserAccessUI
 
         private void ForceLogin_Click(object sender, RoutedEventArgs e)
         {
-            PrecedeToMainWindow(new User() { Name = "TestingUser" });
+            //TODO remove it after finish end
+            ProgramManagement.SetLoggedUser(new User() { Name = "Test user" });
+            PrecedeToMainWindow();
         }
 
-        private void PrecedeToMainWindow(User loggedUser)
+        private void PrecedeToMainWindow()
         {
             WindowsManagement.loginWindow.Close();
-            WindowsManagement.CreateMainWindow(loggedUser);
+            WindowsManagement.CreateMainWindow();
             WindowsManagement.ShowMainWindow();
         }
 
@@ -63,14 +55,15 @@ namespace HotelManagement.UserAccessUI
 
         private void PerformLoginAction()
         {
-            userLogin = new UserLogin();
+            UserLogin userLogin = new UserLogin();
 
             LoginResult loginResult = userLogin.Login(this.UserTextBox.Text, this.UserPasswordTextBox.Password);
             MessageBox.Show(loginResult.Message);
 
             if (loginResult.OperationSuccess)
             {
-                PrecedeToMainWindow(loginResult.AccessingUser);
+                ProgramManagement.SetLoggedUser(loginResult.AccessingUser);
+                PrecedeToMainWindow();
             }
         }
     }

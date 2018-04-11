@@ -1,5 +1,6 @@
-﻿using HotelManagmentLogic.Helpers;
-using HotelManagmentLogic.Models;
+﻿using HotelManagement.Management;
+using HotelManagmentLogic.Helpers;
+using HotelManagmentLogic.Models.Administration;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -44,7 +45,7 @@ namespace HotelManagement.InnerContent
             Guest lastBookedGuest = FillLastBookedGuestOutput(currentGuests);
 
             //fill box which represent logged user name
-            UsernameTextBoxWelcome.Text = WindowsManagement.GetMainWindowInstance().GetCurrentUser().Name;
+            UsernameTextBoxWelcome.Text = ProgramManagement.GetLoggedUser().Name;
 
             //booked guest amount - fill x/x format and also progress bar
             FillGuestCurrentGuestCountOutput(currentGuests);

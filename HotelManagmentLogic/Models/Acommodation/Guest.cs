@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
 using HotelManagmentLogic.Models.Acommodation;
 
-namespace HotelManagmentLogic.Models
+namespace HotelManagmentLogic.Models.Administration
 {
     [Table("Guest")]
     public class Guest

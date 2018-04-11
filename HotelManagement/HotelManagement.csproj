@@ -86,10 +86,11 @@
     <Compile Include="InnerContent\SubContent\RoomCatalogControl.xaml.cs">
       <DependentUpon>RoomCatalogControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Management\ProgramManagement.cs" />
     <Compile Include="UserAccessUI\RegisterWindow.xaml.cs">
       <DependentUpon>RegisterWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="WindowsManagement.cs" />
+    <Compile Include="Management\WindowsManagement.cs" />
     <Page Include="InnerContent\AdministrationControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

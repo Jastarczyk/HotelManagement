@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 
-namespace HotelManagement
+namespace HotelManagement.Management
 {
     class WindowsManagement
     {
@@ -28,9 +28,9 @@ namespace HotelManagement
             }
         }
 
-        public static void CreateMainWindow(User loggedUser)
+        public static void CreateMainWindow()
         {
-            mainWindow = new MainWindow(loggedUser);
+            mainWindow = new MainWindow();
         }
 
         public static void ShowMainWindow()

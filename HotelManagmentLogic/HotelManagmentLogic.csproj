@@ -57,7 +57,11 @@
     <Compile Include="Builders\NewUserBuilder.cs" />
     <Compile Include="Configuration\Config.cs" />
     <Compile Include="Configuration\OutputMessages.cs" />
-    <Compile Include="DatabaseAccess\UserSecurity.cs" />
+    <Compile Include="Models\Administration\Permission.cs" />
+    <Compile Include="Security\Administrator.cs" />
+    <Compile Include="Security\CommonUser.cs" />
+    <Compile Include="Security\IPermission.cs" />
+    <Compile Include="Security\UserSecurity.cs" />
     <Compile Include="Entity\CommonOperations\DatabaseOperations.cs" />
     <Compile Include="Entity\DatabaseConfig\DatabaseInfo.cs" />
     <Compile Include="Entity\OperationResults\IDatabaseResult.cs" />
@@ -77,8 +81,8 @@
     <Compile Include="Models\Acommodation\Room.cs" />
     <Compile Include="Enums\BookingMethods.cs" />
     <Compile Include="Models\Administration\User.cs" />
-    <Compile Include="Models\Booking.cs" />
-    <Compile Include="Models\Guest.cs" />
+    <Compile Include="Models\Acommodation\Booking.cs" />
+    <Compile Include="Models\Acommodation\Guest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
