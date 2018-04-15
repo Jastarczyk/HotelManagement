@@ -34,7 +34,7 @@ namespace HotelManagement.UserAccessUI
         private void ForceLogin_Click(object sender, RoutedEventArgs e)
         {
             //TODO remove it after finish end
-            ProgramManagement.SetLoggedUser(new User() { Name = "Test user" });
+            ProgramManagement.SetLoggedUser(new User() { Name = "Test user", UserType = HotelManagmentLogic.Enums.UserType.Administrator});
             PrecedeToMainWindow();
         }
 

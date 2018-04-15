@@ -57,10 +57,12 @@
     <Compile Include="Builders\NewUserBuilder.cs" />
     <Compile Include="Configuration\Config.cs" />
     <Compile Include="Configuration\OutputMessages.cs" />
+    <Compile Include="Entity\SpecificOperations\UserDatabaseOperations.cs" />
     <Compile Include="Models\Administration\Permission.cs" />
     <Compile Include="Security\Administrator.cs" />
     <Compile Include="Security\CommonUser.cs" />
     <Compile Include="Security\IPermission.cs" />
+    <Compile Include="Security\Manager.cs" />
     <Compile Include="Security\UserSecurity.cs" />
     <Compile Include="Entity\CommonOperations\DatabaseOperations.cs" />
     <Compile Include="Entity\DatabaseConfig\DatabaseInfo.cs" />

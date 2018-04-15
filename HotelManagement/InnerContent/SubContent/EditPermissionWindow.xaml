@@ -1,0 +1,59 @@
+﻿<Window x:Class="HotelManagement.InnerContent.SubContent.EditPermissionWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:HotelManagement.InnerContent.SubContent"
+        mc:Ignorable="d"
+        Title="Edit User's permissions" Height="150" Width="400" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" BorderBrush="Black" WindowStyle="ToolWindow">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1.3*"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="2*"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <ComboBox x:Name="UserTypesComboBox"
+                  Grid.Column="1" 
+                  HorizontalAlignment="Stretch" 
+                  VerticalAlignment="Center"
+                  Margin="10,0,10,0"
+                  Grid.Row="0" 
+                  Loaded="UserTypesComboBox_Loaded"/>
+
+        <Grid Grid.Column="0" Grid.Row="0" Margin="10">
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="2*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+
+            <Label Content="Username:" 
+               HorizontalAlignment="Left"
+               Margin="0,0,0,0" 
+               VerticalAlignment="Center"
+               Grid.Row="1"/>
+
+            <TextBox x:Name ="userNameHolderTextBox"
+                     HorizontalAlignment="Right"
+                     VerticalAlignment="Center"
+                     Width="130"
+                     Height="20"
+                     Grid.Column="1"/>
+        </Grid>
+
+        <Button x:Name="AcceptButton"
+                Content="Accept"
+                Width="100"
+                Height="20"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Center"
+                Margin="0,0,10,0"
+                Grid.Column="1"
+                Grid.Row="1" Click="AcceptButton_Click"/>
+    </Grid>
+</Window>

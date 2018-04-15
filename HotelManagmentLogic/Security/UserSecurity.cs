@@ -13,13 +13,13 @@ namespace HotelManagmentLogic.DatabaseAccess
             HashAlgorithm sha256m = new SHA256Managed();
 
             var saltValue = GenerateSaltValue(10);
-            return new Tuple<string, byte[]>(saltValue, sha256m.ComputeHash(ASCIIEncoding.ASCII.GetBytes(password + saltValue)));
+            return new Tuple<string, byte[]>(saltValue, sha256m.ComputeHash(UTF8Encoding.UTF8.GetBytes(password + saltValue)));
         }
 
         public byte[] ValidateHashedPasswordSHA256(string password, string saltValue)
         {
             HashAlgorithm sha256m = new SHA256Managed();
-            return sha256m.ComputeHash(ASCIIEncoding.ASCII.GetBytes(password + saltValue));
+            return sha256m.ComputeHash(UTF8Encoding.UTF8.GetBytes(password + saltValue));
         }
 
         private string GenerateSaltValue(int length)

@@ -25,6 +25,8 @@ namespace HotelManagement
         private Brush activeButtonColor = Brushes.AliceBlue;
         private Brush defaultButtonColor = Brushes.LightGray;
 
+
+
         public MainWindow()
         {
             InitializeComponent();
@@ -34,48 +36,51 @@ namespace HotelManagement
         {
             InnerFrame.NavigationUIVisibility = NavigationUIVisibility.Hidden;
 
-            InnerFrame.Content = new DashboardControl();
+            InnerFrame.Content = WindowsManagement.GetDashboardControlInstance();
             DashboardButton.Background = activeButtonColor;
             DashboardButton.Focus();
         }
 
-
         private bool CheckIfContentActive<T>() where T : UserControl
         {
-            return InnerFrame.Content.GetType() != typeof(T);
+            if (InnerFrame.Content != null)
+            {
+                return InnerFrame.Content.GetType() != typeof(T);
+            }
+            return false;
         }
 
         private void DashboardButton_Click(object sender, RoutedEventArgs e)
         {
-
-            InnerFrame.Content = CheckIfContentActive<DashboardControl>() ? new DashboardControl()
+            InnerFrame.Content = CheckIfContentActive<DashboardControl>() ? WindowsManagement.GetDashboardControlInstance()
                                                                           : InnerFrame.Content;
             DashboardButton.Background = activeButtonColor;
         }
 
         private void GuestsButton_Click(object sender, RoutedEventArgs e)
         {
-            InnerFrame.Content = CheckIfContentActive<GuestsControl>() ? new GuestsControl()
+            InnerFrame.Content = CheckIfContentActive<GuestsControl>() ? WindowsManagement.GetGuestsControlInstance()
                                                                        : InnerFrame.Content;
             GuestsButton.Background = activeButtonColor;
         }
 
         private void RoomsButton_Click(object sender, RoutedEventArgs e)
         {
-            InnerFrame.Content = CheckIfContentActive<RoomsControl>() ? new RoomsControl()
+            InnerFrame.Content = CheckIfContentActive<RoomsControl>() ? WindowsManagement.GetRoomsControlInstance()
                                                                       : InnerFrame.Content;
-
-
             RoomsButton.Background = activeButtonColor;
         }
 
         private void AdministrationButton_Click(object sender, RoutedEventArgs e)
         {
+            if (ProgramManagement.GetLoggedUser().UserType == HotelManagmentLogic.Enums.UserType.Administrator)
+            {
+                InnerFrame.Content = CheckIfContentActive<AdministrationControl>() ? WindowsManagement.GetAdministrationControlInstance()
+                                                                                   : InnerFrame.Content;
 
-            InnerFrame.Content = CheckIfContentActive<AdministrationControl>() ? new AdministrationControl()
-                                                                               : InnerFrame.Content;
-
-            AdministrationButton.Background = activeButtonColor;
+                AdministrationButton.Background = activeButtonColor;
+            }
+            else MessageBox.Show(HotelManagmentLogic.Configuration.OutputMessages.CantAccessToThatContent);
         }
 
         private void ExitButton_Click(object sender, RoutedEventArgs e)

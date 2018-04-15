@@ -39,6 +39,7 @@ namespace HotelManagmentLogic.Configuration
         public const string FailedAddedToDatabase = "Can't add data to database";
         public const string InvalidArgumentName = "Invalid Argument Name: ";
         public const string MissingArgumentsMessage = "Please fill all information";
+        public const string CantAccessToThatContent = "Can't access to that Content";
 
         #endregion
 

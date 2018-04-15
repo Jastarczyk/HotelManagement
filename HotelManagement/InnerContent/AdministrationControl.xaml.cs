@@ -1,21 +1,11 @@
-﻿using HotelManagmentLogic.Entity.CommonOperations;
+﻿using HotelManagement.InnerContent.SubContent;
+using HotelManagmentLogic.Entity.CommonOperations;
 using HotelManagmentLogic.Enums;
 using HotelManagmentLogic.Helpers;
 using HotelManagmentLogic.Models.Administration;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+
 
 namespace HotelManagement.InnerContent
 {
@@ -24,34 +14,41 @@ namespace HotelManagement.InnerContent
     /// </summary>
     public partial class AdministrationControl : UserControl
     {
-
         public AdministrationControl()
         { 
             InitializeComponent();
             FillRegisteredUserListView();
         }
 
+        private void EditButton_Click(object sender, RoutedEventArgs e)
+        {
+            User selectedUser = RegisteredUserListView.SelectedItem as User;
+            EditPermissionWindow editPermissionControl = new EditPermissionWindow(selectedUser);
+            editPermissionControl.Show();
+        }
+
         private void FillRegisteredUserListView()
         {
             RegisteredUserListView.ItemsSource = DatabaseOperations.GetFullTableBaseOnType<User>()
-                                                                    .ReturnedData
-                                                                    .ConvertToGenericList<User>();
+                                                                   .ReturnedData
+                                                                   .ConvertToGenericList<User>();
+        }
+
+        public void RefreshRegisteredUserList()
+        {
+            FillRegisteredUserListView();
         }
 
         private void RegisteredUserListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            bool dataValid = e.AddedItems.Count > default(int) ? e.AddedItems[0].GetType() == typeof(User)
-                                                : false;
-
-            User selectedUser = dataValid ? e.AddedItems.Cast<User>().FirstOrDefault()
-                                          : new User();
-
-            FillPermissionUserType(selectedUser.UserType);
-
+            if (RegisteredUserListView.SelectedItem != null)
+            {
+                User selectedUser = RegisteredUserListView.SelectedItem as User;
+                FillPermissionUserType(selectedUser.UserType);
+            }
         }
 
         //TODO add possibility to edit user type by administrator
-
         private void FillPermissionUserType(UserType userType)
         {
             Permission permissions;
@@ -65,8 +62,10 @@ namespace HotelManagement.InnerContent
                 case UserType.Common:
                     permissions = new HotelManagmentLogic.Security.CommonUser().GetDefaultPermissions();
                     break;
-                
-                //TODO add manager
+
+                case UserType.Manager:
+                    permissions = new HotelManagmentLogic.Security.Manager().GetDefaultPermissions();
+                    break;
 
                 default:
                     return;

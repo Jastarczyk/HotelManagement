@@ -32,7 +32,10 @@
                       Grid.Column="0"
                       Grid.Row="1"
                       Width="280"
-                      Margin="10,40,10,40" Focusable="False" SelectionChanged="RegisteredUserListView_SelectionChanged">
+                      Margin="10,40,10,40" 
+                  Focusable="False"
+                  ItemsSource="{Binding UserTable}"
+                  SelectionChanged="RegisteredUserListView_SelectionChanged">
 
             <ListView.View>
                 <GridView>
@@ -110,7 +113,8 @@
                       Grid.Row="0"
                       Grid.Column="1"
                       HorizontalAlignment="Center"
-                      VerticalAlignment="Center"
+                      VerticalAlignment="Center" 
+                      IsEnabled="False"
                       />
 
             <CheckBox x:Name="SeeBookedGuestList"
@@ -118,7 +122,8 @@
                       Grid.Row="1"
                       Grid.Column="1"
                       HorizontalAlignment="Center"
-                      VerticalAlignment="Center"
+                      VerticalAlignment="Center" 
+                      IsEnabled="False"
                       />
             
             <CheckBox x:Name="AddNewUserCheckBox"
@@ -126,7 +131,8 @@
                       Grid.Row="2"
                       Grid.Column="1"
                       HorizontalAlignment="Center"
-                      VerticalAlignment="Center"
+                      VerticalAlignment="Center" 
+                      IsEnabled="False"
                       />
 
             <CheckBox x:Name="AccesToAdminPanelCheckBox"
@@ -134,7 +140,8 @@
                       Grid.Row="3"
                       Grid.Column="1"
                       HorizontalAlignment="Center"
-                      VerticalAlignment="Center"
+                      VerticalAlignment="Center" 
+                      IsEnabled="False"
                       />
 
             <CheckBox x:Name="PermissionEditAdminPanelCheckBox"
@@ -142,7 +149,8 @@
                       Grid.Row="4"
                       Grid.Column="1"
                       HorizontalAlignment="Center"
-                      VerticalAlignment="Center"
+                      VerticalAlignment="Center" 
+                      IsEnabled="False"
                       />
         </Grid>
 
@@ -153,15 +161,15 @@
             Grid.Row="1"
             VerticalAlignment="Top" Grid.Column="1" Background="{x:Null}"/>
 
-        <Button x:Name="SaveButton"
-                Content="Save"
+        <Button x:Name="EditButton"
+                Content="Edit"
                 Grid.Column="1"
                 Grid.Row="1"
                 Height="25"
                 Width="100"
                 HorizontalAlignment="Right"
                 VerticalAlignment="Bottom"
-                Margin="0,0,30,20"/>
+                Margin="0,0,30,20" Click="EditButton_Click"/>
 
     </Grid>
 </UserControl>

@@ -15,11 +15,11 @@
                 <RowDefinition Height="*"></RowDefinition>
             </Grid.RowDefinitions>
 
-            <TextBox Name="UserTextBox" Grid.Row="0" Height="25" Margin="50,0,10,0" TextWrapping="Wrap" Text="" VerticalAlignment="Center" Padding="0,2,0,0"/>
-            <Label x:Name="UserNameLabel" Content="User:" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Center" Height="25" Width="auto" />
+            <TextBox Name="UserTextBox" Grid.Row="0" Height="22" Margin="70,4,10,4" TextWrapping="Wrap" Text="" VerticalAlignment="Center" Padding="0,2,0,0"/>
+            <Label x:Name="UserNameLabel" Content="User:" HorizontalAlignment="Left" Margin="26,4,0,5" VerticalAlignment="Center" Height="25" Width="auto" />
 
             <Label x:Name="UserPasswordLabel" Grid.Row="1" Content="Password:" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Center" Height="25" Width="auto" />
-            <PasswordBox x:Name="UserPasswordTextBox" Grid.Row="1" Height="25" Margin="70,0,10,0" VerticalAlignment="Center" Padding="0,2,0,0" PasswordChar="*"/>
+            <PasswordBox x:Name="UserPasswordTextBox" Grid.Row="1" Height="22" Margin="70,0,10,0" VerticalAlignment="Center" Padding="0,2,0,0" PasswordChar="*"/>
 
             <Button x:Name="RegisterButton" Content="Register" Grid.Row="2" HorizontalAlignment ="Right" Margin="0,0,120,0" VerticalAlignment="Center" Width="100" Click="RegisterButton_Click"/>
             <Button x:Name="LoginButton" Content="Login" Grid.Row="2" HorizontalAlignment ="Right" Margin="0,0,10,0" VerticalAlignment="Center" Width="100" Click="LoginButton_Click"/>

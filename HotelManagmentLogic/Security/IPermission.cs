@@ -8,8 +8,8 @@ using System.Threading.Tasks;
 namespace HotelManagmentLogic.Security
 {
     public interface IPermission
-    { 
-        Permission GetDefaultPermissions();
+    {
         void ChangePermissionSet(Permission newPermissions);
+        Permission GetDefaultPermissions();
     }
 }
